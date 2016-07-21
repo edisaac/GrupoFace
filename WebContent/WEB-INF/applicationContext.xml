@@ -21,11 +21,14 @@
          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
          p:location="classpath:quy.properties" />
          
-<bean name="faceBookConnection" class="quy.com.facebook.FaceBookConnection" scope="session">
+<bean name="faceBookConnection" class="quy.com.facebook.FaceBookConnection" scope="singleton">
 	<property name="id" value="${face.id}"  ></property>
 	<property name="secret" value="${face.secret}"  ></property>
 	<property name="uri" value="${face.uri}"  ></property>
 	<property name="scope" value="${face.scope}" ></property>
 </bean>
- 
+<bean name="faceBookToken" class="quy.com.facebook.FaceBookToken" scope="session" >
+	<property name="faceBookConnection" ref="faceBookConnection"></property>
+</bean>
+<bean name="user" class="quy.com.entity.User" scope="session"></bean>
 </beans>
