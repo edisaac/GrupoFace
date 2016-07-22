@@ -77,9 +77,41 @@
 	<version>2.2.13</version>
 	</dependency>
  
+ 	<!--   para los llamados a hibernate -->
+ 	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<version>9.4.1208</version>
+	</dependency>
+	
+  	<!-- Spring para los llamados a hibernate -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	
+	<!-- Pool de conexiones   -->
+	<dependency>
+		<groupId>c3p0</groupId>
+		<artifactId>c3p0</artifactId>
+		<version>0.9.1.2</version>
+	</dependency>
+	
 	</dependencies>
 	
-	<!-- https://mvnrepository.com/artifact/org.json/json -->
+	 
 
 	
 </project>

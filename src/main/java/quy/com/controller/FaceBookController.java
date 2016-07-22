@@ -56,7 +56,7 @@ public class FaceBookController {
 		FaceBookUser fcUser = new FaceBookUser(faceBookToken);
 		fcUser.doRequest();
 		
-		user.setId(fcUser.getId());
+		user.setFacebookId(fcUser.getId());
 		user.setName( fcUser.getName());
 		user.setUrlPicture(fcUser.getUrlPicture());
 	 
