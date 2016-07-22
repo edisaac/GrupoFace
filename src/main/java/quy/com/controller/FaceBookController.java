@@ -1,10 +1,8 @@
 package quy.com.controller;
 
-import java.io.IOException;
-import java.util.Map;
+import java.io.IOException; 
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletException; 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,21 +12,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import quy.com.entity.User;
 import quy.com.facebook.FaceBookConnection;
 import quy.com.facebook.FaceBookToken;
 import quy.com.facebook.FaceBookUser;
+import quy.com.service.IUserService;
  
 @Controller
 @Scope("session")
 public class FaceBookController {
 
 	@Autowired
-	FaceBookConnection faceBookConnection;
+	private FaceBookConnection faceBookConnection;
+	
 	@Autowired
-	FaceBookToken faceBookToken;
+	private FaceBookToken faceBookToken;
+	
 	@Autowired
-	User user;
+	private User user;
+		
+	@Autowired
+	private IUserService UserService;
+	
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String nuevaOrden() {
@@ -44,9 +50,8 @@ public class FaceBookController {
 		code = req.getParameter("code");
 		
 		if (code == null || code.equals("")) {
-			System.out.println(req.getRequestURI());
-			throw new RuntimeException(
-					"ERROR: Didn't get code parameter in callback.");
+			 faceBookToken.setMensaje("Error: No se pudo validar el usuario");
+			 return "index";
 		}
 	 
 		faceBookToken.setCode(code);		
@@ -56,11 +61,22 @@ public class FaceBookController {
 		FaceBookUser fcUser = new FaceBookUser(faceBookToken);
 		fcUser.doRequest();
 		
- 
+		
+		
 		user.setFacebookId(fcUser.getId()); 
 		user.setName( fcUser.getName());
 		user.setUrlPicture(fcUser.getUrlPicture());
-	 
-		return "view/grupos";
+		
+		User temp;
+		temp=UserService.getUserByFaceId(user.getFacebookId()) ;
+		
+		if( temp ==null)
+		{
+			UserService.guardar(user);	
+			return "nuevo";
+		} 
+		
+		UserService.actualizar(user);		
+		return "grupos";
 	}
 }

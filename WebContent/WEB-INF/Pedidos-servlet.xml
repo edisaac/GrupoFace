@@ -11,4 +11,5 @@
     <property name="prefix" value="/" />
     <property name="suffix" value=".xhtml" />
     </bean>
+     
 </beans> 
