@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21-jul-2016 22:15:56 by Hibernate Tools 4.3.4.Final -->
+<hibernate-mapping>
+ <class name="quy.com.entity.User" schema="public" table="user">
+  <id name="userId" type="int">
+   <column name="user_id"/>
+   <generator class="identity"/>
+  </id>
+  <property generated="never" lazy="false" name="name" type="string">
+   <column name="name"/>
+  </property>
+  <property generated="never" lazy="false" name="facebookId" type="string">
+   <column name="facebook_id" unique="true"/>
+  </property>
+  <property generated="never" lazy="false" name="urlPicture" type="string">
+   <column length="1000" name="url_picture"/>
+  </property>
+ </class>
+</hibernate-mapping>
