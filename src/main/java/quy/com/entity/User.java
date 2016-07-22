@@ -1,4 +1,5 @@
 package quy.com.entity;
+ 
 // Generated 21-jul-2016 22:15:56 by Hibernate Tools 4.3.4.Final
 
 /**
@@ -56,5 +57,4 @@ public class User implements java.io.Serializable {
 	public void setUrlPicture(String urlPicture) {
 		this.urlPicture = urlPicture;
 	}
-
 }
