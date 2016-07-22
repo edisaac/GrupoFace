@@ -8,6 +8,7 @@ public class FaceBookToken    {
 	private String token_type;
 	private long expires_in;
 	private String code;
+	private String mensaje;
 	private FaceBookConnection faceBookConnection; 
 	
 
@@ -42,6 +43,7 @@ public class FaceBookToken    {
 	}
 
 	public void setCode(String code) {
+		if (!code.equals(this.code)) this.access_token="";
 		this.code = code;
 	}
 	
@@ -71,6 +73,14 @@ public class FaceBookToken    {
 		this.access_token=json.getString("access_token");
 		this.token_type=json.getString("token_type");
 		this.expires_in=json.getLong("expires_in");		
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 	
 		 

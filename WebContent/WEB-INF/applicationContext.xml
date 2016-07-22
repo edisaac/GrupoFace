@@ -15,9 +15,9 @@
 	http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
-
-	  <mvc:annotation-driven />  
-	<context:component-scan base-package="quy.com.controller"/>	
+	<mvc:annotation-driven />  
+	
+  
 		
 	<bean id="propertyConfigurer"
 	         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
@@ -32,12 +32,11 @@
 	<bean name="faceBookToken" class="quy.com.facebook.FaceBookToken" scope="session" >
 		<property name="faceBookConnection" ref="faceBookConnection"></property>
 	</bean>
-	<bean name="user" class="quy.com.entity.User" scope="session"></bean>
+	
+	
 
 
-
-
-	<bean name="dataSourcex"  class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"  >
+	<bean name="dataSource"  class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"  >
 			
 			<property name="driverClass" value="${jdbc.driver}"></property>
 			<property name="jdbcUrl" value="${jdbc.url}"> </property>
@@ -51,8 +50,8 @@
 			<property name="maxConnectionAge" value="5"></property>		
 			<property name="autoCommitOnClose" value="true"></property>		
 	</bean>
-	<bean name="sessionFactoryHib" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"   >
-		<property name="dataSource" ref="dataSourcex"></property>
+	<bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"   >
+		<property name="dataSource" ref="dataSource"></property>
 		<property name="mappingLocations">
 		<list>
 			<value >classpath:quy/com/entity/*.hbm.xml</value>
@@ -67,15 +66,20 @@
 		</property>		
 	</bean>
 
-     
+    <context:component-scan base-package="quy.com.service,quy.com.controller"/>	
+	
+	<bean name="user" class="quy.com.entity.User" scope="session"></bean>
 	
     <bean name="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactoryHib"></property>
+		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean> 
 	
 	<context:annotation-config />
 	<tx:annotation-driven transaction-manager="txManager"/> 
 
+	<bean id="userDao" class="quy.com.dao.UserDaoImpl" >
+        <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
-
+	
 </beans>

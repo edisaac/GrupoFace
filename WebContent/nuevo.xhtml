@@ -9,12 +9,17 @@
  <link rel="stylesheet" href="css/styles.css"/>
 </h:head> 
 <h:body>   
-  		<section>Hola:</section>
-  		<section>
+  		<section>Bienvenido
+  		</section>
+  		<section> 
 	   	<p:outputLabel  value="#{user.name}"/><br></br>
 	    <h:graphicImage url="#{user.urlPicture}" class="picture">  </h:graphicImage>
 	    </section>
-	 	<section>Mira el listado de tus grupos de junta:
-	 	</section>
+	 	<section>
+ 
+		<p:button outcome="grupos" value="ingresa a registrar nuevos grupos" icon="ui-icon-star">
+		    
+		</p:button>
+		</section>
 </h:body>
 </html>
