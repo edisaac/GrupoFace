@@ -16,5 +16,17 @@
 	    </section>
 	 	<section>Mira el listado de tus grupos de junta:
 	 	</section>
+	 <p:panelGrid >
+	 	<ui:repeat value="#{groupController.groups}" var="group">
+	 		<p:row>
+		       <p:column    >
+		            <p:outputLabel value="#{group.groupId}" />
+		       </p:column>
+		       <p:column   >
+		            <p:outputLabel value="#{group.name}" />
+		       </p:column>
+			</p:row>	
+	 	</ui:repeat>
+	 </p:panelGrid>
 </h:body>
 </html>

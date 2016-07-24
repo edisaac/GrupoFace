@@ -2,5 +2,22 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-schema="public" match-name="user"/>
+	<table-filter match-schema="public" match-name="user" />
+	<table-filter match-name="group" match-schema="public"></table-filter>
+	<table-filter match-name="detail_group" match-schema="public"></table-filter>
+	<table schema="public" name="user">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table schema="public" name="detail_group" catalog="">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table schema="public" name="group">
+	<primary-key>
+		<generator class="identity"></generator>
+	</primary-key>
+</table>
 </hibernate-reverse-engineering>

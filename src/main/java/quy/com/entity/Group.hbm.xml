@@ -3,23 +3,17 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 23-jul-2016 18:50:41 by Hibernate Tools 4.3.4.Final -->
 <hibernate-mapping>
-    <class name="quy.com.entity.User" table="user" schema="public" optimistic-lock="version">
-        <id name="userId" type="java.lang.Integer">
-            <column name="user_id" />
+    <class name="quy.com.entity.Group" table="group" schema="public" optimistic-lock="version">
+        <id name="groupId" type="java.lang.Integer">
+            <column name="group_id" />
             <generator class="identity"></generator>
         </id>
         <property name="name" type="string">
             <column name="name" />
         </property>
-        <property name="facebookId" type="string">
-            <column name="facebook_id" unique="true" />
-        </property>
-        <property name="urlPicture" type="string">
-            <column name="url_picture" length="1000" />
-        </property>
         <set name="detailGroups" table="detail_group" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="user_id" />
+                <column name="group_id" />
             </key>
             <one-to-many class="quy.com.entity.DetailGroup" />
         </set>

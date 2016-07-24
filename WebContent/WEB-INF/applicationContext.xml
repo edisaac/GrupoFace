@@ -66,7 +66,7 @@
 		</property>		
 	</bean>
 
-    <context:component-scan base-package="quy.com.service,quy.com.controller"/>	
+    <context:component-scan base-package="quy.com.service.impl,quy.com.controller"/>	
 	
 	<bean name="user" class="quy.com.entity.User" scope="session"></bean>
 	
@@ -77,9 +77,12 @@
 	<context:annotation-config />
 	<tx:annotation-driven transaction-manager="txManager"/> 
 
-	<bean id="userDao" class="quy.com.dao.UserDaoImpl" >
+	<bean id="userDao" class="quy.com.dao.impl.UserDaoImpl" >
         <property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
+	<bean id="groupDao" class="quy.com.dao.impl.GroupDaoImpl" >
+        <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 	
 </beans>

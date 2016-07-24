@@ -1,14 +1,15 @@
-package quy.com.dao;
+package quy.com.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.StringType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
- 
+import quy.com.dao.IUserDao;
 import quy.com.entity.User;
 
 @Repository 
@@ -48,8 +49,11 @@ public class UserDaoImpl extends Dao implements IUserDao {
 	@Override
 	public User getUserByFaceId(String faceBookId) {
 		// TODO Auto-generated method stub
+		//sizeCriteria.add(Property.forName("user_id").eq(id));
 		return  (User) crearCriteria(User.class).add(
-				Restrictions.sqlRestriction("facebook_id=?",faceBookId,new StringType() )
+				//Property.forName("facebookId").eq(faceBookId)
+				Restrictions.eq("facebookId", faceBookId)
+				//Restrictions.sqlRestriction("facebook_id=?",faceBookId,new StringType() )
 				).uniqueResult();
 		
 	}

@@ -33,7 +33,7 @@ public class FaceBookController {
 	private User user;
 		
 	@Autowired
-	private IUserService UserService;
+	private IUserService userService;
 	
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
@@ -60,23 +60,28 @@ public class FaceBookController {
 		  
 		FaceBookUser fcUser = new FaceBookUser(faceBookToken);
 		fcUser.doRequest();
+				
 		
 		
 		
-		user.setFacebookId(fcUser.getId()); 
+		user.setFacebookId(fcUser.getFacebookId()); 
 		user.setName( fcUser.getName());
 		user.setUrlPicture(fcUser.getUrlPicture());
-		
+	 
 		User temp;
-		temp=UserService.getUserByFaceId(user.getFacebookId()) ;
-		
-		if( temp ==null)
-		{
-			UserService.guardar(user);	
-			return "nuevo";
-		} 
-		
-		UserService.actualizar(user);		
-		return "grupos";
+		temp=userService.getUserByFaceId(fcUser.getFacebookId() ) ;
+		if( temp ==null){  
+			if (userService.guardar(user))
+				return "nuevo";			
+			faceBookToken.setMensaje("Error: No se pudo crear el usuario.");
+			return "index";
+		} else {
+			user.setUserId(temp.getUserId());		
+			
+			if (userService.actualizar(user))		
+				return "grupos";
+			faceBookToken.setMensaje("Error: No se pudo actualizar el usuario.");
+			return "index";
+		}
 	}
 }

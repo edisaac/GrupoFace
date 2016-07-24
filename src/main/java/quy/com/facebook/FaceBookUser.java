@@ -6,19 +6,19 @@ import org.primefaces.json.JSONObject;
  
 public class FaceBookUser {
 	private FaceBookToken token;
-	private String id;
+	private String facebookId;
 	private String name;
 	private String urlPicture;
 	
 	public FaceBookUser(FaceBookToken token) {
 		this.token = token;
 	}
-	public String getId() {
-		return id;
+	public String getFacebookId() {
+		return facebookId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setFacebookId(String facebookId) {
+		this.facebookId = facebookId;
 	}
 
 	public String getName() {
@@ -58,7 +58,7 @@ public class FaceBookUser {
 	
 		
 		
-		this.id=json.getString("id");
+		this.facebookId=json.getString("id");
 		this.name=json.getString("name");
 	 
 		picture=json.getJSONObject("picture");
