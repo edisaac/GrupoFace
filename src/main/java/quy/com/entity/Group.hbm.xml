@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 23-jul-2016 18:50:41 by Hibernate Tools 4.3.4.Final -->
+<!-- Generated 24-jul-2016 16:04:20 by Hibernate Tools 4.3.4.Final -->
 <hibernate-mapping>
     <class name="quy.com.entity.Group" table="group" schema="public" optimistic-lock="version">
         <id name="groupId" type="java.lang.Integer">
@@ -10,6 +10,22 @@
         </id>
         <property name="name" type="string">
             <column name="name" />
+        </property>
+        <property name="beginDate" type="date">
+            <column name="begin_date" length="13" />
+        </property>
+        <property name="amount" type="big_decimal">
+            <column name="amount" precision="15" />
+        </property>
+        <property name="period" type="java.lang.Character">
+            <column name="period" length="1">
+                <comment>D=Daily W=Weekly M=Montly</comment>
+            </column>
+        </property>
+        <property name="state" type="java.lang.Character">
+            <column name="state" length="1">
+                <comment>C=closed A=Active P=Preparation</comment>
+            </column>
         </property>
         <set name="detailGroups" table="detail_group" inverse="true" lazy="true" fetch="select">
             <key>

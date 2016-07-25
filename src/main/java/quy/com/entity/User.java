@@ -1,5 +1,5 @@
 package quy.com.entity;
-// Generated 23-jul-2016 18:50:41 by Hibernate Tools 4.3.4.Final
+// Generated 24-jul-2016 16:04:20 by Hibernate Tools 4.3.4.Final
 
 import java.util.HashSet;
 import java.util.Set;

@@ -79,7 +79,7 @@ public class FaceBookController {
 			user.setUserId(temp.getUserId());		
 			
 			if (userService.actualizar(user))		
-				return "grupos";
+				return "redirect:grupos.xhtml";
 			faceBookToken.setMensaje("Error: No se pudo actualizar el usuario.");
 			return "index";
 		}

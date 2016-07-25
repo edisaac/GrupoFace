@@ -3,5 +3,5 @@
  <PROCESS-ITEM NAME="rules:#view#grupos.xhtml" PATH="/view/grupos.xhtml"
   SHAPE="80,160,50,25" model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#view#index.xhtml" PATH="/view/index.xhtml"
-  SHAPE="176,128,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+  SHAPE="240,160,50,25" model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
