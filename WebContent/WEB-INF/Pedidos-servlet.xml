@@ -7,9 +7,9 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
  
     <context:component-scan base-package="cart.com"></context:component-scan>
-   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <!--  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix" value="/" />
     <property name="suffix" value=".xhtml" />
     </bean>
-    
+     -->
 </beans> 

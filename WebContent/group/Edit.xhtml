@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="GroupEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditGroupTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline"
+                 value="#{myBundle.Cancel}"
+                  icon="ui-icon-arrow-l"
+                   action="pm:GroupListPage"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="GroupEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{groupController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{myBundle.EditGroupLabel_groupId}" for="groupId" />
+                            <h:outputText id="groupId" value="#{groupController.selected.groupId}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditGroupLabel_name}" for="name" />
+                            <p:inputText id="name" value="#{groupController.selected.name}" title="#{myBundle.EditGroupTitle_name}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditGroupLabel_beginDate}" for="beginDate" />
+                            <p:calendar id="beginDate" pattern="MM/dd/yyyy" value="#{groupController.selected.beginDate}" title="#{myBundle.EditGroupTitle_beginDate}"  showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditGroupLabel_amount}" for="amount" />
+                            <p:inputText id="amount" value="#{groupController.selected.amount}" title="#{myBundle.EditGroupTitle_amount}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditGroupLabel_period}" for="period" />
+                            <p:inputText id="period" value="#{groupController.selected.period}" title="#{myBundle.EditGroupTitle_period}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditGroupLabel_state}" for="state" />
+                            <p:inputText id="state" value="#{groupController.selected.state}" title="#{myBundle.EditGroupTitle_state}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{groupController.save}" value="#{myBundle.Save}"
+                     update=":GroupListPage:GroupListForm:datalist,:growl" 
+                     action="pm:GroupListPage"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>
