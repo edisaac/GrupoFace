@@ -4,7 +4,8 @@
 }
  
 .groupName{
-	font-weight: bold;
+	font-weight: bold; 
+	display: block;
 }
  
 .ui-field-contain label{
@@ -24,3 +25,13 @@
 .ui-field-contain{
  padding: .5em 0;
 }
+.groupStateP {	   
+	 color: lightcoral ;	 
+}
+.groupStateA {	 
+	 color: green;	 
+}
+.groupStateC {	
+	 color: gray ;	
+}
+

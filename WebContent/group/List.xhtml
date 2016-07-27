@@ -21,7 +21,7 @@
                                  icon="ui-icon-plus"   iconPos="right"
                                  value="#{myBundle.Create}" 
                                  update=":GroupCreatePage:GroupCreateForm" 
-                                 actionListener="#{groupController.prepareCreate}"
+                                 actionListener="#{groupBean.prepareCreate}"
                                  action="pm:GroupCreatePage?transition=slide"/>
 				  
                                              
@@ -32,35 +32,22 @@
 
             <h:form id="GroupListForm">
 				
-                <p:dataList id="datalist"
-                             
-                            pt:data-inset="true"
-                            value="#{groupController.groups}"
-                            var="item">
-
-                   
-
-                    <p:commandLink update=":GroupViewPage:GroupViewForm" action="pm:GroupViewPage?transition=slide">
-                        <p>
-                              
-                            <h:outputText value="#{item.name}"/><br></br>
-                            ,&nbsp;
+                <p:dataList id="datalist"   value="#{groupBean.items}" var="item">
+                    <p:commandLink update=":GroupViewPage:GroupViewForm" action="pm:GroupViewPage?transition=slide"  >
+                        <p>     
+							<h:outputText value="#{item.name}" styleClass="groupName groupState#{item.state}"/> 
+                            <h:outputText value="#{groupBean.periodToString(item)}"/>
+                            <h:outputText value="#{item.amount}" styleClass="groupField"/>
+                            <br></br>
                             <h:outputText value="#{item.beginDate}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
-                            ,&nbsp;
-                            <h:outputText value="#{item.amount}"/>
-                            ,&nbsp;
-                            <h:outputText value="#{item.period}"/>
-                            ,&nbsp;
-                            <h:outputText value="#{item.state}"/>
- 
                         </p>
-                        <f:setPropertyActionListener value="#{item}" target="#{groupController.selected}" />
+                        <f:setPropertyActionListener value="#{item}" target="#{groupBean.selected}" />
                     </p:commandLink>
 
                     <f:facet name="footer"   >
-                        <h:outputText value="#{myBundle.ListGroupEmpty}" rendered="#{groupController.isGroupsEmpty()}"/>
+                        <h:outputText value="#{myBundle.ListGroupEmpty}" rendered="#{groupBean.isItemsEmpty()}"/>
                     </f:facet>
 
                 </p:dataList>

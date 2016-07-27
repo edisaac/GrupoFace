@@ -1,21 +1,17 @@
 package quy.com.controller;
 
-import java.util.ArrayList;
+ 
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+ 
 import javax.faces.event.ActionEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
+ 
 import quy.com.controller.util.JsfUtil;
-import quy.com.entity.DetailGroup;
 import quy.com.entity.Group;
 import quy.com.entity.User;
 import quy.com.service.IGroupService;
@@ -23,9 +19,9 @@ import quy.com.service.IGroupService;
 
  
 @Controller
-
 @Scope("session")
-public class GroupController {
+public class GroupBean {
+	
 	@Autowired
 	private User user;
 		
@@ -33,27 +29,26 @@ public class GroupController {
 	private IGroupService groupService;
 	
 	
-	private List<Group>  groups;
+	private List<Group>  items;
 	private Group selected;
-
-	
-	public List<Group> getGroups() {
-		if (groups == null) {
-			groups=groupService.getGroupsByUser(user.getUserId());		
+ 
+	public List<Group> getItems() {
+		if (items == null) {
+			items=groupService.getGroupsByUser(user.getUserId());		
 		}
-		return groups;
+		return items;
 	}
-	public boolean isGroupsEmpty(){
-		if (groups == null) {
+	public boolean isItemsEmpty(){
+		if (items == null) {
 			return true;
 		}
-		if (groups.size()<1){
+		if (items.size()<1){
 			return true;
 		}
 		return false;
 	}
-	public void setGroups(List<Group> groups ){
-		 this.groups = groups;
+	public void setItems(List<Group> items ){
+		 this.items = items;
 	}
 	
 	public Group getSelected() {
@@ -81,7 +76,7 @@ public class GroupController {
 		else
 			{
 			this.selected= groupService.getGroup(this.selected.getGroupId());
-			this.groups = null;
+			this.items = null;
 			}
 	}
 	
@@ -89,11 +84,42 @@ public class GroupController {
 		String msg = ResourceBundle.getBundle("/MyBundle").getString("GroupCreated");
 		 
 		if (groupService.guardar(this.selected)) { 
-			this.groups.add(this.selected);
+			this.items.add(this.selected);
 			JsfUtil.addSuccessMessage(msg);	
 		 }
 	}
-    
-	  
+	
+	public String periodToString(Group group){
+		String var="";
+		switch (group.getPeriod()){
+			case 'M':
+				var= ResourceBundle.getBundle("/MyBundle").getString("GroupPeriodMonthly");
+				break;
+			case 'D':
+				var= ResourceBundle.getBundle("/MyBundle").getString("GroupPeriodDaily");
+				break;
+			case 'W':
+				var= ResourceBundle.getBundle("/MyBundle").getString("GroupPeriodWeekly");
+				break;
+		}
+		
+		return   var;
+	}
+	public String stateToString(Group group){
+		String var="";
+		switch (group.getState()){
+			case 'P':
+				var= ResourceBundle.getBundle("/MyBundle").getString("GroupStatePending");
+				break;
+			case 'A':
+				var= ResourceBundle.getBundle("/MyBundle").getString("GroupStateAccepted");
+				break;
+			case 'C':
+				var= ResourceBundle.getBundle("/MyBundle").getString("GroupStateCompleted");
+				break;
+		}	
+		
+		return   var;
+	}
 }
 ;

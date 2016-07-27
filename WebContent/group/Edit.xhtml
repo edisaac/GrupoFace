@@ -23,25 +23,25 @@
 
                 <h:panelGroup id="display">
                 
-                    <p:outputPanel rendered="#{groupController.selected != null}">
+                    <p:outputPanel rendered="#{groupBean.selected != null}">
                       
                         <pm:field>
                             <p:outputLabel value="#{myBundle.GroupLabel_name}" for="name" />
-                            <p:inputText  mask="true" required="true" id="name" value="#{groupController.selected.name}" title="#{myBundle.GroupTitle_name}"/>
+                            <p:inputText  mask="true" required="true" id="name" value="#{groupBean.selected.name}" title="#{myBundle.GroupTitle_name}"/>
                         </pm:field>                     
 						 
                         <pm:field>
                             <p:outputLabel value="#{myBundle.GroupLabel_amount}" for="amount" />
-                            <p:inputText required="true" id="amount" value="#{groupController.selected.amount}" title="#{myBundle.GroupTitle_amount}"/>
+                            <p:inputText required="true" id="amount" value="#{groupBean.selected.amount}" title="#{myBundle.GroupTitle_amount}"/>
                         </pm:field>
 
                         <pm:field>
                          <p:outputLabel value="#{myBundle.GroupLabel_period}" for="period" />      
-                          <p:selectOneButton  id="period" value="#{groupController.selected.period}"
+                          <p:selectOneButton  id="period" value="#{groupBean.selected.period}"
                            title="#{myBundle.GroupTitle_period}" required="true" >
-					            <f:selectItem itemLabel="#{myBundle.PeriodDaily}" itemValue="D" />
-					            <f:selectItem itemLabel="#{myBundle.PeriodWeekly}" itemValue="W" />
-					            <f:selectItem itemLabel="#{myBundle.PeriodMonthly}" itemValue="M" />
+					            <f:selectItem itemLabel="#{myBundle.GroupPeriodDaily}" itemValue="D" />
+					            <f:selectItem itemLabel="#{myBundle.GroupPeriodWeekly}" itemValue="W" />
+					            <f:selectItem itemLabel="#{myBundle.GroupPeriodMonthly}" itemValue="M" />
 					       </p:selectOneButton>
 			          	</pm:field>
 
@@ -50,23 +50,23 @@
                             
                             
                         	<p:selectOneMenu   title="#{myBundle.GroupTitle_state}" 
-                     		required="true"  id="state" value="#{groupController.selected.state}">
-					            <f:selectItem itemLabel="#{myBundle.StatePending}" itemValue="P" />
-					            <f:selectItem itemLabel="#{myBundle.StateAccepted}" itemValue="A" />
-					            <f:selectItem itemLabel="#{myBundle.StateCompleted}" itemValue="C" />
+                     		required="true"  id="state" value="#{groupBean.selected.state}">
+					            <f:selectItem itemLabel="#{myBundle.GroupStatePending}" itemValue="P" />
+					            <f:selectItem itemLabel="#{myBundle.GroupStateAccepted}" itemValue="A" />
+					            <f:selectItem itemLabel="#{myBundle.GroupStateCompleted}" itemValue="C" />
 					        </p:selectOneMenu >
                         
                         </pm:field>
                         
                         <pm:field>
                             <p:outputLabel value="#{myBundle.GroupLabel_beginDate}" for="beginDate" />
-                            <p:calendar  required="true" id="beginDate" mode="inline"   value="#{groupController.selected.beginDate}" title="#{myBundle.GroupTitle_beginDate}"  />
+                            <p:calendar  required="true" id="beginDate" mode="inline"   value="#{groupBean.selected.beginDate}" title="#{myBundle.GroupTitle_beginDate}"  />
                         </pm:field>
                     </p:outputPanel>
                     <p:commandButton  value="#{myBundle.Save}"
                       icon="ui-icon-check"
                      update=":GroupViewPage:GroupViewForm,:growl" 
-                     actionListener="#{groupController.save}"
+                     actionListener="#{groupBean.save}"
                      action="pm:GroupViewPage?transition=fade"/>
 
                 </h:panelGroup>

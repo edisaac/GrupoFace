@@ -21,7 +21,7 @@ import quy.com.service.IUserService;
  
 @Controller
 @Scope("session")
-public class FaceBookController {
+public class FaceBookBean {
 
 	@Autowired
 	private FaceBookConnection faceBookConnection;
@@ -60,10 +60,7 @@ public class FaceBookController {
 		  
 		FaceBookUser fcUser = new FaceBookUser(faceBookToken);
 		fcUser.doRequest();
-				
-		
-		
-		
+					
 		user.setFacebookId(fcUser.getFacebookId()); 
 		user.setName( fcUser.getName());
 		user.setUrlPicture(fcUser.getUrlPicture());
