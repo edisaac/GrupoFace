@@ -1,4 +1,4 @@
-package quy.com.dao;
+package quy.com.dao.impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;

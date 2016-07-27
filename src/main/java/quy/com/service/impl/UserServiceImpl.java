@@ -1,4 +1,4 @@
-package quy.com.service;
+package quy.com.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import quy.com.dao.IUserDao;
 import quy.com.entity.User;
+import quy.com.service.IUserService;
 
 @Service("userService") 	
 public class UserServiceImpl implements IUserService {

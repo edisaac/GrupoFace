@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final -->
+<hibernate-mapping>
+    <class name="quy.com.entity.DetailGroup" table="detail_group" schema="public" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="group" class="quy.com.entity.Group" fetch="select">
+            <column name="group_id" />
+        </many-to-one>
+        <many-to-one name="user" class="quy.com.entity.User" fetch="select">
+            <column name="user_id" />
+        </many-to-one>
+        <property name="position" type="java.lang.Integer">
+            <column name="position" />
+        </property>
+        <property name="rol" type="java.lang.Character">
+            <column name="rol" length="1">
+                <comment>A=Admin N=Normal</comment>
+            </column>
+        </property>
+        <property name="state" type="java.lang.Character">
+            <column name="state" length="1">
+                <comment>P=Invited A=active C=closed</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

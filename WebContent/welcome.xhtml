@@ -1,26 +1,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html  xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"      
       xmlns:pm="http://primefaces.org/mobile"> 
-         <f:view renderKitId="PRIMEFACES_MOBILE" />
+       <f:view renderKitId="PRIMEFACES_MOBILE" />
 <h:head>
- 
+ <link rel="stylesheet" href="css/styles.css"/>
 </h:head> 
-<h:body>  
-
+<h:body> 
 <pm:page id="main">
 	<pm:header title="#{myBundle.AppName}"></pm:header>
 	<pm:content>
-		<a  class="ui-menuitem-link ui-corner-all" href="login.do">
-		Ingresar con cuenta de Facebook
-		</a> 	
-		<br></br>	   	
-		<p:outputLabel  value="#{faceBookToken.mensaje}"/>
+		<p:outputLabel  value="#{myBundle.Welcome}"/> 
+	   	<p:outputLabel  value="#{user.name}"/> 
+	    <h:graphicImage url="#{user.urlPicture}" class="picture">  </h:graphicImage> 
+		<p:button outcome="group" value="#{myBundle.ListGroupTitle}" icon="ui-icon-user">		    
+		</p:button>
 	</pm:content>
 </pm:page>
- 	
+  
+  	 
+  	
+		 
 </h:body>
 </html>
