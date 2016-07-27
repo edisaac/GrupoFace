@@ -34,7 +34,8 @@ public class GroupController {
 	
 	
 	private List<Group>  groups;
-	private Group selected; 
+	private Group selected;
+
 	
 	public List<Group> getGroups() {
 		if (groups == null) {
@@ -51,46 +52,40 @@ public class GroupController {
 		return selected;
 	}
 
-	public void setSelected(Group selected) {
+	public void setSelected(Group selected) {	
 		this.selected = selected;
 	}
 
-	public Group prepareCreate (ActionEvent event) {
+	public void prepareCreate (ActionEvent event) {
 		 Group group=new Group();
-		 DetailGroup dg= new DetailGroup(group,user,1,'A','A');
-		 group.getDetailGroups().add(dg);
+		 group.setState('P');
+		 group.setUser(user);
 		 this.selected=group;
-		return group;
+		return ;
 	}
-	public String prepareCreate(String uri){
-		Group group=new Group();
-		DetailGroup dg= new DetailGroup(group,user,1,'A','A');
-		group.getDetailGroups().add(dg);
-		this.selected=group;
-		return uri;
-	}
+	 
 	
-	private void save(ActionEvent event) {
+	public void save(ActionEvent event) {
 		 String msg = ResourceBundle.getBundle("/MyBundle").getString("GroupUpdated");
 		 
 		if (groupService.actualizar(this.selected))  
-			 JsfUtil.addSuccessMessage(msg);
-		 else
-			 JsfUtil.addErrorMessage("Error:"+ msg) ;
+			JsfUtil.addSuccessMessage(msg);
+		else
+			{
+			this.selected= groupService.getGroup(this.selected.getGroupId());
+			this.groups = null;
+			}
 	}
 	
-	private void saveNew(ActionEvent event) {
+	public void saveNew(ActionEvent event) {
 		String msg = ResourceBundle.getBundle("/MyBundle").getString("GroupCreated");
 		 
-		if (groupService.guardar(this.selected))  
-			 JsfUtil.addSuccessMessage(msg);
-		 else
-			 JsfUtil.addErrorMessage("Error:"+ msg) ;
+		if (groupService.guardar(this.selected)) { 
+			this.groups.add(this.selected);
+			JsfUtil.addSuccessMessage(msg);	
+		 }
 	}
     
-	  public String navigateTo(String actionName) {	       
-	        return actionName;
-	    }
-    
+	  
 }
 ;

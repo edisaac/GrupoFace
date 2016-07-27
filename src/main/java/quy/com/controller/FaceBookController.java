@@ -51,7 +51,7 @@ public class FaceBookController {
 		
 		if (code == null || code.equals("")) {
 			 faceBookToken.setMensaje("Error: No se pudo validar el usuario");
-			 return "index.xhtml";
+			 return "index";
 		}
 	 
 		faceBookToken.setCode(code);		
@@ -72,16 +72,16 @@ public class FaceBookController {
 		temp=userService.getUserByFaceId(fcUser.getFacebookId() ) ;
 		if( temp ==null){  
 			if (userService.guardar(user))
-				return "welcome.xhtml";			
+				return "welcome";			
 			faceBookToken.setMensaje("Error: No se pudo crear el usuario.");
-			return "index.xhtml";
+			return "index";
 		} else {
 			user.setUserId(temp.getUserId());		
 			
 			if (userService.actualizar(user))		
-				return "welcome.xhtml";
+				return "welcome";
 			faceBookToken.setMensaje("Error: No se pudo actualizar el usuario.");
-			return "index.xhtml";
+			return "index";
 		}
 	}
 }

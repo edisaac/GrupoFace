@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-jul-2016 16:04:20 by Hibernate Tools 4.3.4.Final -->
+<!-- Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final -->
 <hibernate-mapping>
     <class name="quy.com.entity.DetailGroup" table="detail_group" schema="public" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">

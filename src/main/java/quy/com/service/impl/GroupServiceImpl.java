@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import quy.com.controller.util.JsfUtil;
 import quy.com.dao.IGroupDao;
 import quy.com.entity.Group;
 import quy.com.service.IGroupService;
@@ -20,7 +21,7 @@ public class GroupServiceImpl implements IGroupService {
 			groupDao.guardar(arg0); 			
 			return true;
 		}catch (Exception e){
-			System.out.println("Error>>" + e);
+			JsfUtil.setException(e);
 			return false;
 		}
 	}
@@ -31,7 +32,7 @@ public class GroupServiceImpl implements IGroupService {
 			groupDao.actualizar(arg0); 		
 			return true;
 		}catch (Exception e){
-			System.out.println("Error>>" + e);
+			JsfUtil.setException(e);
 			return false;
 		}
 	}
@@ -42,7 +43,7 @@ public class GroupServiceImpl implements IGroupService {
 			groupDao.eliminar(arg0 ); 		
 			return true;
 		}catch (Exception e){
-			System.out.println("Error>>" + e);
+			JsfUtil.setException(e);
 			return false;
 		}
 	}
@@ -52,7 +53,7 @@ public class GroupServiceImpl implements IGroupService {
 		try	{					
 			return groupDao.getGroup(id );	
 		}catch (Exception e){
-			System.out.println("Error>>" + e);
+			JsfUtil.setException(e);
 			return null;
 		}
 	}
@@ -62,7 +63,7 @@ public class GroupServiceImpl implements IGroupService {
 		try	{					
 			return groupDao.getGroups() ;	
 		}catch (Exception e){
-			System.out.println("Error>>" + e);
+			JsfUtil.setException(e);
 			return null;
 		}
 	}
@@ -72,7 +73,7 @@ public class GroupServiceImpl implements IGroupService {
 		try	{					
 			return groupDao.getGroupsByUser(id) ;	
 		}catch (Exception e){
-			System.out.println("Error>>" + e);
+			JsfUtil.setException(e);
 			return null;
 		}
 	}

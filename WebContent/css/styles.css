@@ -4,3 +4,8 @@
   border-radius: 50%;
  
 }
+ .sticky { position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }

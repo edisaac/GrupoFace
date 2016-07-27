@@ -9,16 +9,20 @@
     <f:view renderKitId="PRIMEFACES_MOBILE" />
      
     <h:head> 
+     <link rel="stylesheet" href="css/styles.css"/>
+   
     </h:head>
      
     <h:body>
     
-    	 <p:growl id="growl" life="3000"/>
+    	 
+        <p:growl id="growl" life="3000"/>
     	
         <ui:include src="/group/List.xhtml"/>
-        <ui:include src="/group/View.xhtml"/>
+        <ui:include src="/group/Create.xhtml"/>        
         <ui:include src="/group/Edit.xhtml"/>
-        <ui:include src="/group/Create.xhtml"/>
+        <ui:include src="/group/View.xhtml"/>
+        
       
     </h:body>
      

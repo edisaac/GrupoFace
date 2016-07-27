@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-jul-2016 16:04:20 by Hibernate Tools 4.3.4.Final -->
+<!-- Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final -->
 <hibernate-mapping>
     <class name="quy.com.entity.Group" table="group" schema="public" optimistic-lock="version">
         <id name="groupId" type="java.lang.Integer">
             <column name="group_id" />
             <generator class="identity"></generator>
         </id>
+        <many-to-one name="user" class="quy.com.entity.User" fetch="select">
+            <column name="user_id" />
+        </many-to-one>
         <property name="name" type="string">
             <column name="name" />
         </property>

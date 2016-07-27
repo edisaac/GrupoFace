@@ -10,21 +10,28 @@
     <pm:page id="GroupViewPage" lazy="true">
         <pm:header title="#{myBundle.ViewGroupTitle}">
             <h:form>
-                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="pm:GroupListPage"/>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" 
+                value="#{myBundle.Back}"
+                 update=":GroupListPage:GroupListForm:datalist"
+                 icon="ui-icon-carat-l" action="pm:GroupListPage"/>
+                 <p:commandButton id="editButton" 
+                                 styleClass="ui-btn-right ui-btn-inline"
+                                 icon="ui-icon-edit"   iconPos="right"
+                                 value="#{myBundle.Edit}" 
+                                 update=":GroupEditPage:GroupEditForm"                                  
+                                 action="pm:GroupEditPage?transition=slide"/>
             </h:form>
+            
         </pm:header>
 
         <pm:content>
 
             <h:form id="GroupViewForm">
-
+				
                 <h:panelGroup id="display">
+                	<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+ 
                     <p:outputPanel rendered="#{groupController.selected != null}">
-
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_groupId}"/>
-                            <h:outputText value="#{groupController.selected.groupId}" title="#{myBundle.ViewGroupTitle_groupId}"/>
-                        </pm:field>
 
                         <pm:field>
                             <h:outputText value="#{myBundle.ViewGroupLabel_name}"/>

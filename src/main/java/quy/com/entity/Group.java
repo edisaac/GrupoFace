@@ -1,5 +1,5 @@
 package quy.com.entity;
-// Generated 24-jul-2016 16:04:20 by Hibernate Tools 4.3.4.Final
+// Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,6 +12,7 @@ import java.util.Set;
 public class Group implements java.io.Serializable {
 
 	private Integer groupId;
+	private User user;
 	private String name;
 	private Date beginDate;
 	private BigDecimal amount;
@@ -22,7 +23,9 @@ public class Group implements java.io.Serializable {
 	public Group() {
 	}
 
-	public Group(String name, Date beginDate, BigDecimal amount, Character period, Character state, Set detailGroups) {
+	public Group(User user, String name, Date beginDate, BigDecimal amount, Character period, Character state,
+			Set detailGroups) {
+		this.user = user;
 		this.name = name;
 		this.beginDate = beginDate;
 		this.amount = amount;
@@ -37,6 +40,14 @@ public class Group implements java.io.Serializable {
 
 	public void setGroupId(Integer groupId) {
 		this.groupId = groupId;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getName() {

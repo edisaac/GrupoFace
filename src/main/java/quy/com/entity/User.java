@@ -1,5 +1,5 @@
 package quy.com.entity;
-// Generated 24-jul-2016 16:04:20 by Hibernate Tools 4.3.4.Final
+// Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,15 +14,17 @@ public class User implements java.io.Serializable {
 	private String facebookId;
 	private String urlPicture;
 	private Set detailGroups = new HashSet(0);
+	private Set groups = new HashSet(0);
 
 	public User() {
 	}
 
-	public User(String name, String facebookId, String urlPicture, Set detailGroups) {
+	public User(String name, String facebookId, String urlPicture, Set detailGroups, Set groups) {
 		this.name = name;
 		this.facebookId = facebookId;
 		this.urlPicture = urlPicture;
 		this.detailGroups = detailGroups;
+		this.groups = groups;
 	}
 
 	public Integer getUserId() {
@@ -63,6 +65,14 @@ public class User implements java.io.Serializable {
 
 	public void setDetailGroups(Set detailGroups) {
 		this.detailGroups = detailGroups;
+	}
+
+	public Set getGroups() {
+		return this.groups;
+	}
+
+	public void setGroups(Set groups) {
+		this.groups = groups;
 	}
 
 }
