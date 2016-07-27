@@ -1,11 +1,26 @@
 @CHARSET "ISO-8859-1";
-.picture {
- 
-  border-radius: 50%;
- 
+.picture { 
+  border-radius: 50%; 
 }
- .sticky { position: fixed;
-  width: 100%;
-  left: 0;
-  top: 0;
-  }
+ 
+.groupName{
+	font-weight: bold;
+}
+ 
+.ui-field-contain label{
+	font-size: 0.7em;
+	font-weight: bold;
+	color: blue;
+}
+.groupLabel{
+	font-size: 0.7em;
+	font-weight: bold;
+	color: blue;
+	display: block; 
+}
+.groupField{
+	padding-left: 6em;
+}
+.ui-field-contain{
+ padding: .5em 0;
+}

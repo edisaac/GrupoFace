@@ -39,11 +39,19 @@ public class GroupController {
 	
 	public List<Group> getGroups() {
 		if (groups == null) {
-		groups=groupService.getGroupsByUser(user.getUserId());
+			groups=groupService.getGroupsByUser(user.getUserId());		
 		}
 		return groups;
 	}
-	
+	public boolean isGroupsEmpty(){
+		if (groups == null) {
+			return true;
+		}
+		if (groups.size()<1){
+			return true;
+		}
+		return false;
+	}
 	public void setGroups(List<Group> groups ){
 		 this.groups = groups;
 	}

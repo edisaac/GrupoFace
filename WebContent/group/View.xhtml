@@ -8,7 +8,7 @@
                 xmlns:pm="http://primefaces.org/mobile">
 
     <pm:page id="GroupViewPage" lazy="true">
-        <pm:header title="#{myBundle.ViewGroupTitle}">
+        <pm:header title="#{myBundle.ViewGroupTitle}" fixed="true">
             <h:form>
                 <p:commandButton styleClass="ui-btn-left ui-btn-inline" 
                 value="#{myBundle.Back}"
@@ -33,32 +33,36 @@
  
                     <p:outputPanel rendered="#{groupController.selected != null}">
 
+                        <pm:field>                           
+                            <h:outputText value="#{groupController.selected.name}" 
+                            styleClass="groupName"
+                             title="#{myBundle.GroupTitle_name}"/>
+                        </pm:field>
+
+                        
                         <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_name}"/>
-                            <h:outputText value="#{groupController.selected.name}" title="#{myBundle.ViewGroupTitle_name}"/>
+                           <h:outputText value="#{myBundle.GroupLabel_amount}" styleClass="groupLabel"/> 
+                           <h:outputText value="#{groupController.selected.amount}" title="#{myBundle.GroupTitle_amount}" styleClass="groupField"/>
                         </pm:field>
 
                         <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_beginDate}"/>
-                            <h:outputText value="#{groupController.selected.beginDate}" title="#{myBundle.ViewGroupTitle_beginDate}">
+                            <h:outputText value="#{myBundle.GroupLabel_period}" styleClass="groupLabel"/>
+                            <h:outputText value="#{groupController.selected.period}" title="#{myBundle.GroupTitle_period}" styleClass="groupField"/>
+                            
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.GroupLabel_state}" styleClass="groupLabel"/>
+                            <h:outputText value="#{groupController.selected.state}" title="#{myBundle.GroupTitle_state}" styleClass="groupField"/>
+                        </pm:field>
+                        
+                        <pm:field>
+                            <h:outputText value="#{myBundle.GroupLabel_beginDate}" styleClass="groupLabel"/>
+                            <h:outputText value="#{groupController.selected.beginDate}" title="#{myBundle.GroupTitle_beginDate}" styleClass="groupField">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </pm:field>
-
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_amount}"/>
-                            <h:outputText value="#{groupController.selected.amount}" title="#{myBundle.ViewGroupTitle_amount}"/>
-                        </pm:field>
-
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_period}"/>
-                            <h:outputText value="#{groupController.selected.period}" title="#{myBundle.ViewGroupTitle_period}"/>
-                        </pm:field>
-
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_state}"/>
-                            <h:outputText value="#{groupController.selected.state}" title="#{myBundle.ViewGroupTitle_state}"/>
-                        </pm:field>
+                        
                     </p:outputPanel>
                 </h:panelGroup>
 

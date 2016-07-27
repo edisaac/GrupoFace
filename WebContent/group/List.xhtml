@@ -9,7 +9,7 @@
                 xmlns:pm="http://primefaces.org/mobile">
 
     <pm:page id="GroupListPage">
-        <pm:header title="#{myBundle.ListGroupTitle}" styleClass="sticky">
+        <pm:header title="#{myBundle.ListGroupTitle}" fixed="true" >
             <h:form >
                 <p:button id="backButton" 
                                  styleClass="ui-btn-left  ui-btn-inline"
@@ -33,14 +33,12 @@
             <h:form id="GroupListForm">
 				
                 <p:dataList id="datalist"
-                           
+                             
                             pt:data-inset="true"
                             value="#{groupController.groups}"
                             var="item">
 
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListGroupTitle}"/>
-                    </f:facet>
+                   
 
                     <p:commandLink update=":GroupViewPage:GroupViewForm" action="pm:GroupViewPage?transition=slide">
                         <p>
@@ -61,8 +59,8 @@
                         <f:setPropertyActionListener value="#{item}" target="#{groupController.selected}" />
                     </p:commandLink>
 
-                    <f:facet name="footer">
-                        <h:outputText value="#{myBundle.ListGroupTitle}"/>
+                    <f:facet name="footer"   >
+                        <h:outputText value="#{myBundle.ListGroupEmpty}" rendered="#{groupController.isGroupsEmpty()}"/>
                     </f:facet>
 
                 </p:dataList>
