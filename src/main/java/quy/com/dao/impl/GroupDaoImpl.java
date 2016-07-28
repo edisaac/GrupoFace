@@ -52,34 +52,14 @@ public class GroupDaoImpl extends Dao implements IGroupDao {
 
 	@Override
 	public List<Group> getGroupsByUser(int id) {
-		// TODO Auto-generated method stub
-		/*
-		 * select A.*
-FROM Group A
-where   exists
-(
-    select entryid
-    FROM DetailGroup dg
-    where dg.userId = id
-    and dg.groupId = g.groupId
-  
-)
-		 */
-	 
-		
-		 Criteria criteria = getSession().createCriteria(Group.class, "g");
+		// TODO Auto-generated method stub		
+		Criteria criteria = crearCriteria(Group.class, "g");
 		DetachedCriteria subcriteria = DetachedCriteria.forClass(DetailGroup.class, "dg");
 		subcriteria.add(Restrictions.eq("dg.user.userId", id));
 		subcriteria.add(Restrictions.eqProperty(  "dg.group.groupId", "g.groupId"));
 		subcriteria.setProjection(Projections.property("dg.user.userId"));
 		criteria.add(Subqueries.exists(subcriteria));
-		 
-		/*
-		Criteria criteria = getSession().createCriteria(Group.class, "g");
-		criteria.createAlias("g.detailGroups", "dg");
-		criteria.add(Restrictions.eq("dg.user.userId", id));
-		criteria.setResultTransformer(DistinctRootEntityResultTransformer.INSTANCE);
-		*/	 
+	 
 		return   criteria.list();
 
 	}

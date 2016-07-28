@@ -21,7 +21,7 @@ import quy.com.service.IUserService;
  
 @Controller
 @Scope("session")
-public class FaceBookBean {
+public class UserBean {
 
 	@Autowired
 	private FaceBookConnection faceBookConnection;
@@ -30,11 +30,10 @@ public class FaceBookBean {
 	private FaceBookToken faceBookToken;
 	
 	@Autowired
+	private IUserService userService;
+ 
 	private User user;
 		
-	@Autowired
-	private IUserService userService;
-	
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String nuevaOrden() {
@@ -60,25 +59,34 @@ public class FaceBookBean {
 		  
 		FaceBookUser fcUser = new FaceBookUser(faceBookToken);
 		fcUser.doRequest();
-					
-		user.setFacebookId(fcUser.getFacebookId()); 
-		user.setName( fcUser.getName());
-		user.setUrlPicture(fcUser.getUrlPicture());
+		this.user= new User();			
+		getUser().setFacebookId(fcUser.getFacebookId()); 
+		getUser().setName( fcUser.getName());
+		getUser().setUrlPicture(fcUser.getUrlPicture());
 	 
 		User temp;
 		temp=userService.getUserByFaceId(fcUser.getFacebookId() ) ;
 		if( temp ==null){  
-			if (userService.guardar(user))
+			if (userService.guardar(getUser()))
 				return "welcome";			
 			faceBookToken.setMensaje("Error: No se pudo crear el usuario.");
 			return "index";
 		} else {
-			user.setUserId(temp.getUserId());		
+			getUser().setUserId(temp.getUserId());		
 			
-			if (userService.actualizar(user))		
+			if (userService.actualizar(getUser()))		
 				return "welcome";
 			faceBookToken.setMensaje("Error: No se pudo actualizar el usuario.");
 			return "index";
 		}
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

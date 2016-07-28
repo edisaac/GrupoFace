@@ -14,8 +14,8 @@
 	<pm:header title="#{myBundle.AppName}"></pm:header>
 	<pm:content>
 		<p:outputLabel  value="#{myBundle.Welcome}"/> 
-	   	<p:outputLabel  value="#{user.name}"/> 
-	    <h:graphicImage url="#{user.urlPicture}" class="picture">  </h:graphicImage> 
+	   	<p:outputLabel  value="#{userBean.user.name}"/> 
+	    <h:graphicImage url="#{userBean.user.urlPicture}" styleClass="picture">  </h:graphicImage> 
 		<p:button outcome="group" value="#{myBundle.GroupTitle}" icon="ui-icon-user">		    
 		</p:button>
 	</pm:content>

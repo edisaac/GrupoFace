@@ -16,9 +16,7 @@
     http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
 	<mvc:annotation-driven />  
-	
-  
-		
+			
 	<bean id="propertyConfigurer"
 	         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 	         p:location="classpath:quy.properties" />
@@ -33,11 +31,7 @@
 		<property name="faceBookConnection" ref="faceBookConnection"></property>
 	</bean>
 	
-	
-
-
 	<bean name="dataSource"  class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"  >
-			
 			<property name="driverClass" value="${jdbc.driver}"></property>
 			<property name="jdbcUrl" value="${jdbc.url}"> </property>
 			<property name="user" value="${jdbc.user}"></property>
@@ -68,8 +62,7 @@
 
     <context:component-scan base-package="quy.com.service.impl,quy.com.controller"/>	
 	
-	<bean name="user" class="quy.com.entity.User" scope="session"></bean>
-	
+
     <bean name="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean> 
@@ -83,6 +76,8 @@
 	<bean id="groupDao" class="quy.com.dao.impl.GroupDaoImpl" >
         <property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+	<bean id="detailGroupDao" class="quy.com.dao.impl.DetailGroupDaoImpl" >
+        <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	
 </beans>

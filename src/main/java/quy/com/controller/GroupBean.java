@@ -18,13 +18,11 @@ import quy.com.service.IGroupService;
 
 
  
-@Controller
+@Controller 
 @Scope("session")
 public class GroupBean {
 	
-	@Autowired
-	private User user;
-		
+	 
 	@Autowired
 	private IGroupService groupService;
 	
@@ -32,13 +30,14 @@ public class GroupBean {
 	private List<Group>  items;
 	private Group selected;
  
-	public List<Group> getItems() {
+	public List<Group> getGroupsByUser(User user) {
 		if (items == null) {
 			items=groupService.getGroupsByUser(user.getUserId());		
 		}
 		return items;
 	}
-	public boolean isItemsEmpty(){
+ 
+	public boolean isGroupsEmpty(){
 		if (items == null) {
 			return true;
 		}
@@ -46,9 +45,6 @@ public class GroupBean {
 			return true;
 		}
 		return false;
-	}
-	public void setItems(List<Group> items ){
-		 this.items = items;
 	}
 	
 	public Group getSelected() {
@@ -59,7 +55,7 @@ public class GroupBean {
 		this.selected = selected;
 	}
 
-	public void prepareCreate (ActionEvent event) {
+	public void prepareCreate (User user) {
 		 Group group=new Group();
 		 group.setState('P');
 		 group.setUser(user);

@@ -11,7 +11,7 @@
         <many-to-one name="group" class="quy.com.entity.Group" fetch="select">
             <column name="group_id" />
         </many-to-one>
-        <many-to-one name="user" class="quy.com.entity.User" fetch="select">
+        <many-to-one name="user" class="quy.com.entity.User" fetch="join">
             <column name="user_id" />
         </many-to-one>
         <property name="position" type="java.lang.Integer">

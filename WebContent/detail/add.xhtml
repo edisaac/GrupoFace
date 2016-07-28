@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="DetailGroupAddPage" lazy="true">
+        <pm:header   title="#{myBundle.AddDetailGroupTitle}" fixed="true">
+            <h:form >
+                <p:commandButton 
+                 styleClass="ui-btn-left ui-btn-inline"
+                 value="#{myBundle.Cancel}"
+                 icon="ui-icon-carat-l" 
+                 update=":GroupViewPage:DetailGroupListForm"
+                 action="pm:GroupViewPage?transition=fade"/>
+            </h:form>
+        </pm:header>
+	    
+        <pm:content>
+        	<h:form id="DetailGroupAddForm" >
+				<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+				<p:inputText id="name" value="#{detailGroupBean.name}" type="search" placeholder="Search">
+	            	  <p:ajax event="keyup" update="datalist" listener="#{detailGroupBean.search}" />
+	       		</p:inputText>
+	       		 
+				<p:dataList id="datalist"                          
+                            pt:data-inset="true"
+                            value="#{detailGroupBean.users}"
+                            var="item">    
+                    <f:facet name="header">
+                     <h:outputText value="#{myBundle.ListDetailGroupTitle}"/>
+                    </f:facet>  
+                                   
+                         <p>
+                         <h:graphicImage url="#{item.urlPicture}" styleClass="picture">  </h:graphicImage> 
+                         <h:outputText value="#{item.name}"/>                         
+                           
+	                     <p:commandButton 
+		                 styleClass="ui-btn-right ui-btn-inline"	                
+		                 icon="ui-icon-plus" 
+		                 actionListener="#{detailGroupBean.add(item)}"
+		                 update=":DetailGroupAddPage:DetailGroupAddForm" 
+		                  />
+	                  </p>
+              </p:dataList>
+			</h:form>
+        </pm:content>
+    </pm:page>
+</ui:composition>
+    

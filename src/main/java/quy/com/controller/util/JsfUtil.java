@@ -44,6 +44,7 @@ public class JsfUtil {
 	    }
 	    public static void setException(Exception ex)	    {
 	    	Throwable cause = getRootCause(ex.getCause());
+	    	System.out.println("Error>>" + ex);
             if (cause != null) {
                 if (cause instanceof ConstraintViolationException) {
                     ConstraintViolationException excp = (ConstraintViolationException) cause;
@@ -60,6 +61,8 @@ public class JsfUtil {
                         addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
                     }
                 }
+            }else {
+            	addErrorMessage(ex.toString());
             }
 	    }
 }		

@@ -5,6 +5,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:pm="http://primefaces.org/mobile">
 
     <pm:page id="GroupViewPage" lazy="true">
@@ -13,7 +14,7 @@
                 <p:commandButton id="backButton"  value="#{myBundle.Back}"
 				                 styleClass="ui-btn-left ui-btn-inline" icon="ui-icon-carat-l"				                 
 				                 update=":GroupListPage:GroupListForm"
-                 				 action="pm:GroupListPage"/>
+                 				 action="pm:GroupListPage?transition=fade"/>
                  				 
                 <p:commandButton id="editButton"  value="#{myBundle.Edit}"
                                  styleClass="ui-btn-right ui-btn-inline"  icon="ui-icon-edit"   iconPos="right"                                                                 
@@ -25,11 +26,11 @@
         <pm:content>
 
             <h:form id="GroupViewForm">
-				
+				<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
                 <h:panelGroup id="display">
-                	<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+                	
  
-                    <p:outputPanel rendered="#{groupBean.selected != null}">
+                    <p:outputPanel >
 
                         <pm:field>                           
                             <h:outputText value="#{groupBean.selected.name}" 
@@ -56,16 +57,39 @@
                         <pm:field>
                             <h:outputText value="#{myBundle.GroupLabel_beginDate}" styleClass="groupLabel"/>
                             <h:outputText value="#{groupBean.selected.beginDate}" title="#{myBundle.GroupTitle_beginDate}" styleClass="groupField">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </pm:field>
                         
                     </p:outputPanel>
-                </h:panelGroup>
-
+                </h:panelGroup> 
+            </h:form>
+            <h:form id="DetailGroupListForm">
+				<p:dataList id="datalist"                          
+                            pt:data-inset="true"
+                            value="#{detailGroupBean.items}"
+                            var="item">
+                        <f:facet name="header">
+                        	<h:outputText value="#{myBundle.ListDetailGroupTitle}"/>
+                        	 <p:commandButton id="editButton"  
+                                 styleClass="ui-btn-right ui-btn-inline ListHeaderButton"  icon="ui-icon-plus"   iconPos="right"                                                                 
+                                 update=":DetailGroupAddPage:DetailGroupAddForm"                                  
+                                 action="pm:DetailGroupAddPage?transition=slideup"/>
+                    	</f:facet> 
+                         <p>
+                         <h:graphicImage url="#{item.user.urlPicture}" styleClass="picture">  </h:graphicImage> 
+                            <h:outputText value="#{item.position}"/>                       
+                            ,&nbsp;
+                            <h:outputText value="#{item.state}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.user.name}"/>
+                            ,&nbsp;
+                        </p>  
+                       
+              </p:dataList>
             </h:form>
 			
-			
+ 
         </pm:content>
 
     </pm:page>

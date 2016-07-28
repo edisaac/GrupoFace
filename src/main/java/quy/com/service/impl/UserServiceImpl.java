@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import quy.com.controller.util.JsfUtil;
 import quy.com.dao.IUserDao;
 import quy.com.entity.User;
 import quy.com.service.IUserService;
@@ -20,7 +21,7 @@ public class UserServiceImpl implements IUserService {
 				userDao.guardar(arg0); 			
 				return true;
 			}catch (Exception e){
-				System.out.println("Error>>" + e);
+				JsfUtil.setException(e);
 				return false;
 			}
 		}
@@ -31,7 +32,7 @@ public class UserServiceImpl implements IUserService {
 				userDao.actualizar(arg0); 			
 				return true;
 			}catch (Exception e){
-				System.out.println("Error>>" + e);
+				JsfUtil.setException(e);
 				return false;
 			}
 		}
@@ -42,7 +43,7 @@ public class UserServiceImpl implements IUserService {
 				userDao.eliminar(arg0); 			
 				return true;
 			}catch (Exception e){
-				System.out.println("Error>>" + e);
+				JsfUtil.setException(e);
 				return false;
 			}
 		}
@@ -52,7 +53,7 @@ public class UserServiceImpl implements IUserService {
 			try	{					
 				return userDao.getUser(id );	
 			}catch (Exception e){
-				System.out.println("Error>>" + e);
+				JsfUtil.setException(e);
 				return null;
 			}
 		}
@@ -62,7 +63,7 @@ public class UserServiceImpl implements IUserService {
 			try	{					
 				return userDao.getUsers();	
 			}catch (Exception e){
-				System.out.println("Error>>" + e);
+				JsfUtil.setException(e);
 				return null;
 			}
 		}
@@ -72,10 +73,22 @@ public class UserServiceImpl implements IUserService {
 			try	{					
 				return userDao.getUserByFaceId(faceBookId);	
 			}catch (Exception e){
-				System.out.println("Error>>" + e);
+				JsfUtil.setException(e);
 				return null;
 			}
 		}
+
+		@Override
+		public List<User> getNotGroupUsersByName(int groupId, String name) {
+			try	{					
+				return userDao.getNotGroupUsersByName(groupId,name);	
+			}catch (Exception e){
+				JsfUtil.setException(e);
+				return null;
+			}
+		}
+
+	 
 		
 		
 }
