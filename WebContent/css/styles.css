@@ -39,3 +39,16 @@
 	  top:0;
 	  margin:0;
 }
+.face-button { 
+	cursor: pointer;
+	background: #3B5998;
+ 	height: 52px;
+ 	color:white;
+}
+ 
+.face-icon {
+    background-image: url("#{facesContext.externalContext.request.contextPath}/imagenes/facebook.png") !important;
+    width: 32px; 
+    height: 32px; 
+    float: left;
+    }
