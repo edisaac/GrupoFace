@@ -17,7 +17,7 @@ import quy.com.service.IDetailGroupService;
 import quy.com.service.IUserService;
  
 @Controller
-@Scope("session")
+@Scope("view")
 public class DetailGroupBean {
 	
 	
@@ -31,13 +31,18 @@ public class DetailGroupBean {
 	private GroupBean groupBean;
 	
 	private List<DetailGroup>  items;
+	private DetailGroup selected;
 	
 	private List<User> users;
 	
-	private String name;
+	private String name="";
 	
-	public List<DetailGroup> getItems() {	 
+	public List<DetailGroup> getItems() {
+		if (groupBean.getSelected()==null || groupBean.getSelected().getGroupId()==null ){
+			items=null;
+		}else{
 		items=detailGroupService.getDetailsByGroup(groupBean.getSelected().getGroupId());
+		}
 		return items;
 	}
 	public  void setItems( List<DetailGroup> items) {	 
@@ -78,10 +83,23 @@ public class DetailGroupBean {
 		if (detailGroupService.guardar( detailGroup))  
 			{JsfUtil.addSuccessMessage(msg);
 			items.add(detailGroup);
-			users.remove(user);
+			users=null;
 			name=""; 
 			}
 		 
 	}
-	
+	public DetailGroup getSelected() {
+		return selected;
+	}
+	public void setSelected(DetailGroup selected) {
+		this.selected = selected;
+	}
+	public void delete(ActionEvent event) {
+		String msg = ResourceBundle.getBundle("/MyBundle").getString("DetailGroupDeleted");
+		 
+		if (detailGroupService.eliminar(this.selected)) { 
+			this.items.remove(this.selected);
+			JsfUtil.addSuccessMessage(msg);	
+		 }
+	}
 }

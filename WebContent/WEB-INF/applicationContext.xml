@@ -16,7 +16,16 @@
     http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
 	<mvc:annotation-driven />  
-			
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="view">
+                    <bean class="com.github.javaplugs.jsf.ViewScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    		
 	<bean id="propertyConfigurer"
 	         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 	         p:location="classpath:quy.properties" />

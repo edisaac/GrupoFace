@@ -64,30 +64,7 @@
                     </p:outputPanel>
                 </h:panelGroup> 
             </h:form>
-            <h:form id="DetailGroupListForm">
-				<p:dataList id="datalist"                          
-                            pt:data-inset="true"
-                            value="#{detailGroupBean.items}"
-                            var="item">
-                        <f:facet name="header">
-                        	<h:outputText value="#{myBundle.ListDetailGroupTitle}"/>
-                        	 <p:commandButton id="editButton"  
-                                 styleClass="ui-btn-right ui-btn-inline ListHeaderButton"  icon="ui-icon-plus"   iconPos="right"                                                                 
-                                 update=":DetailGroupAddPage:DetailGroupAddForm"                                  
-                                 action="pm:DetailGroupAddPage?transition=slideup"/>
-                    	</f:facet> 
-                         <p>
-                         <h:graphicImage url="#{item.user.urlPicture}" styleClass="picture">  </h:graphicImage> 
-                            <h:outputText value="#{item.position}"/>                       
-                            ,&nbsp;
-                            <h:outputText value="#{item.state}"/>
-                            ,&nbsp;
-                            <h:outputText value="#{item.user.name}"/>
-                            ,&nbsp;
-                        </p>  
-                       
-              </p:dataList>
-            </h:form>
+            <ui:include src="/detail/IView.xhtml"/>
 			
  
         </pm:content>

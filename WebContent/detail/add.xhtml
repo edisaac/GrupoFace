@@ -13,7 +13,7 @@
             <h:form >
                 <p:commandButton 
                  styleClass="ui-btn-left ui-btn-inline"
-                 value="#{myBundle.Cancel}"
+                 value="#{myBundle.Back}"
                  icon="ui-icon-carat-l" 
                  update=":GroupViewPage:DetailGroupListForm"
                  action="pm:GroupViewPage?transition=fade"/>
@@ -21,18 +21,22 @@
         </pm:header>
 	    
         <pm:content>
-        	<h:form id="DetailGroupAddForm" >
-				<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
-				<p:inputText id="name" value="#{detailGroupBean.name}" type="search" placeholder="Search">
+        	<h:form id="DetailGroupAddForm"   >
+        	  <h:panelGroup id="display" >
+                    <p:outputPanel id="panel">  
+                     <p:focus context="panel"/>
+				
+				<p:inputText id="name" value="#{detailGroupBean.name}" type="search" placeholder="#{myBundle.Search}">
 	            	  <p:ajax event="keyup" update="datalist" listener="#{detailGroupBean.search}" />
 	       		</p:inputText>
-	       		 
-				<p:dataList id="datalist"                          
-                            pt:data-inset="true"
-                            value="#{detailGroupBean.users}"
-                            var="item">    
-                    <f:facet name="header">
-                     <h:outputText value="#{myBundle.ListDetailGroupTitle}"/>
+	       		
+	       		<ui:repeat  id="datalistdetail" value="#{detailGroupBean.items}" var="item">
+	       			<h:graphicImage url="#{item.user.urlPicture}" styleClass="picture">  </h:graphicImage> 
+                </ui:repeat> 
+                <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+				<p:dataList id="datalist" pt:data-inset="true" value="#{detailGroupBean.users}" var="item">    
+                    <f:facet name="header">                   
+                      <p:commandButton  value="#{myBundle.SearchDetailGroupTitle}"     update="datalist"/>
                     </f:facet>  
                                    
                          <p>
@@ -47,6 +51,8 @@
 		                  />
 	                  </p>
               </p:dataList>
+              </p:outputPanel>
+              </h:panelGroup>
 			</h:form>
         </pm:content>
     </pm:page>

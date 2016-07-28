@@ -6,12 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.github.javaplugs.jsf.ViewScope;
 
 import quy.com.entity.User;
 import quy.com.facebook.FaceBookConnection;
@@ -34,7 +36,8 @@ public class UserBean {
  
 	private User user;
 		
-	
+	 
+	  
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String nuevaOrden() {
    

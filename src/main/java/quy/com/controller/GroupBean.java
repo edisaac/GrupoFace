@@ -19,21 +19,19 @@ import quy.com.service.IGroupService;
 
  
 @Controller 
-@Scope("session")
-public class GroupBean {
-	
+@Scope("view")
+public class GroupBean {	
 	 
 	@Autowired
 	private IGroupService groupService;
-	
-	
+		
 	private List<Group>  items;
 	private Group selected;
  
 	public List<Group> getGroupsByUser(User user) {
-		if (items == null) {
+		 
 			items=groupService.getGroupsByUser(user.getUserId());		
-		}
+		 
 		return items;
 	}
  

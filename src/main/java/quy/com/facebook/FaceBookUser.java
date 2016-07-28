@@ -1,7 +1,10 @@
 package quy.com.facebook;
 
  
+import org.apache.log4j.Logger;
 import org.primefaces.json.JSONObject;
+
+import quy.com.controller.UserBean;
 
  
 public class FaceBookUser {
@@ -9,7 +12,7 @@ public class FaceBookUser {
 	private String facebookId;
 	private String name;
 	private String urlPicture;
-	
+	private static final Logger logger = Logger.getLogger(FaceBookUser.class);
 	public FaceBookUser(FaceBookToken token) {
 		this.token = token;
 	}
@@ -64,7 +67,7 @@ public class FaceBookUser {
 		picture=json.getJSONObject("picture");
 		data=picture.getJSONObject("data");
 		System.out.println(data.getString("url"));
-		
+		logger.trace(data.getString("url"));
 		this.urlPicture=data.getString("url"); 
 		
 	}
