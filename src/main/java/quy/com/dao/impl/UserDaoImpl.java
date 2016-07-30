@@ -20,7 +20,7 @@ import quy.com.entity.Group;
 import quy.com.entity.User;
 
 @Repository 
-@Transactional
+
 public class UserDaoImpl extends Dao implements IUserDao {
 
 	@Override

@@ -2,6 +2,7 @@ package quy.com.service;
 
 import java.util.List;
 
+import quy.com.entity.DetailGroup;
 import quy.com.entity.Group;
 
 public interface IGroupService {

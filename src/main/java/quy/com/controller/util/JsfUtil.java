@@ -5,14 +5,24 @@ import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 
-public class JsfUtil {
-	  public static void addErrorMessage(String msg) {
-	        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, "");
-	        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-	        FacesContext.getCurrentInstance().validationFailed(); // Invalidate JSF page if we raise an error message
+import quy.com.facebook.FaceBookUser;
 
+public class JsfUtil {
+		private static final Logger logger = Logger.getLogger(JsfUtil.class);
+		
+	  public static void addErrorMessage(String msg) {
+	        
+	        if (FacesContext.getCurrentInstance() ==null){
+	        	System.out.println(msg);
+				logger.trace(msg);				
+	        }else{
+	        	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, "");
+	        	FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+		        FacesContext.getCurrentInstance().validationFailed(); // Invalidate JSF page if we raise an error message
+		   }   
 	    }
 	    public static  void addSuccessMessage(String msg) {
 	        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, "");

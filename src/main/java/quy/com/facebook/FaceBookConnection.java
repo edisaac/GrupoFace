@@ -11,6 +11,7 @@ public class FaceBookConnection {
 	private String secret ;
 	private String uri ; 
 	private String scope;	
+	private String userFields;
 	
 	public String getFBAuthUrl() {
 		String fbLoginUrl = "";
@@ -60,6 +61,16 @@ public class FaceBookConnection {
 
 	public void setScope(String scope) {
 		this.scope = scope;
+	}
+
+
+	public String getUserFields() {
+		return userFields;
+	}
+
+
+	public void setUserFields(String userFields) {
+		this.userFields = userFields;
 	}
 
 	

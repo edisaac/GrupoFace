@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final -->
+<!-- Generated 29-jul-2016 17:25:51 by Hibernate Tools 4.3.4.Final -->
 <hibernate-mapping>
     <class name="quy.com.entity.User" table="user" schema="public" optimistic-lock="version">
         <id name="userId" type="java.lang.Integer">
@@ -16,6 +16,15 @@
         </property>
         <property name="urlPicture" type="string">
             <column name="url_picture" length="1000" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="250" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="mobile" length="20" />
+        </property>
+        <property name="state" type="char">
+            <column name="state" length="1" not-null="true" />
         </property>
         <set name="detailGroups" table="detail_group" inverse="true" lazy="true" fetch="select">
             <key>

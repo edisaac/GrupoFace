@@ -17,7 +17,7 @@ import quy.com.entity.DetailGroup;
 import quy.com.entity.Group;
  
 @Repository 
-@Transactional
+
 public class GroupDaoImpl extends Dao implements IGroupDao {
 
 	@Override

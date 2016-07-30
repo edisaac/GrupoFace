@@ -57,27 +57,34 @@ public class UserBean {
 		}
 	 
 		faceBookToken.setCode(code);		
-		faceBookToken.doRequest();		
-		 
+		faceBookToken.doRequest();
 		  
 		FaceBookUser fcUser = new FaceBookUser(faceBookToken);
 		fcUser.doRequest();
-		this.user= new User();			
-		getUser().setFacebookId(fcUser.getFacebookId()); 
-		getUser().setName( fcUser.getName());
-		getUser().setUrlPicture(fcUser.getUrlPicture());
+		
 	 
-		User temp;
-		temp=userService.getUserByFaceId(fcUser.getFacebookId() ) ;
-		if( temp ==null){  
-			if (userService.guardar(getUser()))
+		this.user=userService.getUserByFaceId(fcUser.getFacebookId() ) ;
+		boolean isNew=false;
+		
+		if (this.user==null){
+			this.user= new User();
+			this.user.setState('0');
+			isNew=true;
+		}
+		
+		this.user.setFacebookId(fcUser.getFacebookId()); 
+		this.user.setName( fcUser.getName());
+		this.user.setUrlPicture(fcUser.getUrlPicture());
+		this.user.setEmail(fcUser.getEmail()); 
+		
+		if( isNew){ 			
+			if (userService.guardar(this.user))
 				return "welcome";			
 			faceBookToken.setMensaje("Error: No se pudo crear el usuario.");
 			return "index";
-		} else {
-			getUser().setUserId(temp.getUserId());		
+		} else {			
 			
-			if (userService.actualizar(getUser()))		
+			if (userService.actualizar(this.user))		
 				return "welcome";
 			faceBookToken.setMensaje("Error: No se pudo actualizar el usuario.");
 			return "index";

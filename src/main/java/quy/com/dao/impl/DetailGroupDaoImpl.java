@@ -12,7 +12,7 @@ import quy.com.dao.IDetailGroupDao;
 import quy.com.entity.DetailGroup;
  
 @Repository 
-@Transactional
+
 public class DetailGroupDaoImpl extends Dao implements IDetailGroupDao {
 
 	@Override

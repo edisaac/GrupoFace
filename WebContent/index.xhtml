@@ -32,7 +32,8 @@
 		<form id="frm" action="login.do" method="get">				 
  		<span class="btn btn-block btn-social btn-facebook"  href="login.do" 
  			onclick="_gaq.push(['_trackEvent', 'exit', 'header', 'flag-icon-css']);frm.submit();" >
-            <span class="fa fa-facebook"></span> Sign in with Facebook
+            <span class="fa fa-facebook"></span>  
+            <p:outputLabel  value="#{myBundle.FaceLoginLabel}"/>
          </span>       
 		<br></br>	   	
 		<p:outputLabel  value="#{faceBookToken.mensaje}"/>

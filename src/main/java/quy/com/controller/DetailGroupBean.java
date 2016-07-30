@@ -74,11 +74,15 @@ public class DetailGroupBean {
 	
 	public void add( User user) {
 		String msg = ResourceBundle.getBundle("/MyBundle").getString("DetailGroupCreated");
+		
 		DetailGroup detailGroup=new DetailGroup();
+		
+		detailGroup.setPosition(items.size()+1);
 		detailGroup.setRol('N');
 		detailGroup.setState('P');
 		detailGroup.setGroup(groupBean.getSelected());
 		detailGroup.setUser(user);
+		
 		name="";
 		if (detailGroupService.guardar( detailGroup))  
 			{JsfUtil.addSuccessMessage(msg);
@@ -97,8 +101,36 @@ public class DetailGroupBean {
 	public void delete(ActionEvent event) {
 		String msg = ResourceBundle.getBundle("/MyBundle").getString("DetailGroupDeleted");
 		 
-		if (detailGroupService.eliminar(this.selected)) { 
-			this.items.remove(this.selected);
+		if (detailGroupService.eliminar(this.selected)) { 			 
+			JsfUtil.addSuccessMessage(msg);	
+		 }
+	}
+	
+	public void moveUp(ActionEvent event) {
+		String msg = ResourceBundle.getBundle("/MyBundle").getString("DetailGroupMoved");
+		DetailGroup up;
+		int position;
+		position=this.selected.getPosition();
+		if (position==1) {
+			return;
+		}
+		up=items.get(position-2);
+		 
+		if (detailGroupService.mover(this.selected,up)) { 			 
+			JsfUtil.addSuccessMessage(msg);	
+		 }
+	}
+	public void moveDown(ActionEvent event) {
+		String msg = ResourceBundle.getBundle("/MyBundle").getString("DetailGroupMoved");
+		DetailGroup up;
+		int position;
+		position=this.selected.getPosition();
+		if (position==items.size()) {
+			return;
+		}
+		up=items.get(position);
+		 
+		if (detailGroupService.mover(this.selected,up)) { 			 
 			JsfUtil.addSuccessMessage(msg);	
 		 }
 	}

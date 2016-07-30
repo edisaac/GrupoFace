@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final -->
+<!-- Generated 29-jul-2016 17:25:51 by Hibernate Tools 4.3.4.Final -->
 <hibernate-mapping>
     <class name="quy.com.entity.DetailGroup" table="detail_group" schema="public" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -26,6 +26,9 @@
             <column name="state" length="1">
                 <comment>P=Invited A=active C=closed</comment>
             </column>
+        </property>
+        <property name="paymentDate" type="date">
+            <column name="payment_date" length="13" />
         </property>
     </class>
 </hibernate-mapping>

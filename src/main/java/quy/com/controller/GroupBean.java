@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
  
 import quy.com.controller.util.JsfUtil;
+import quy.com.entity.DetailGroup;
 import quy.com.entity.Group;
 import quy.com.entity.User;
 import quy.com.service.IGroupService;
@@ -57,6 +58,7 @@ public class GroupBean {
 		 Group group=new Group();
 		 group.setState('P');
 		 group.setUser(user);
+		  
 		 this.selected=group;
 		return ;
 	}
@@ -76,7 +78,9 @@ public class GroupBean {
 	
 	public void saveNew(ActionEvent event) {
 		String msg = ResourceBundle.getBundle("/MyBundle").getString("GroupCreated");
-		 
+		
+	
+		
 		if (groupService.guardar(this.selected)) { 
 			this.items.add(this.selected);
 			JsfUtil.addSuccessMessage(msg);	

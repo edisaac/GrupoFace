@@ -35,6 +35,7 @@
 		<property name="secret" value="${face.secret}"  ></property>
 		<property name="uri" value="${face.uri}"  ></property>
 		<property name="scope" value="${face.scope}" ></property>
+		<property name="userFields" value="${face.userfields}" ></property>
 	</bean>
 	<bean name="faceBookToken" class="quy.com.facebook.FaceBookToken" scope="session" >
 		<property name="faceBookConnection" ref="faceBookConnection"></property>
