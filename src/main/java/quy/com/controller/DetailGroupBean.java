@@ -1,5 +1,6 @@
 package quy.com.controller;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -18,7 +19,7 @@ import quy.com.service.IUserService;
  
 @Controller
 @Scope("view")
-public class DetailGroupBean {
+public class DetailGroupBean implements Serializable {
 	
 	
 	@Autowired

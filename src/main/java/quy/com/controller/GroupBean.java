@@ -1,6 +1,7 @@
 package quy.com.controller;
 
  
+import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -21,7 +22,7 @@ import quy.com.service.IGroupService;
  
 @Controller 
 @Scope("view")
-public class GroupBean {	
+public class GroupBean implements Serializable {	
 	 
 	@Autowired
 	private IGroupService groupService;
