@@ -7,18 +7,37 @@
       xmlns:pm="http://primefaces.org/mobile"> 
          <f:view renderKitId="PRIMEFACES_MOBILE" />
 <h:head>
- 
+	 	<link href="bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+	    <link href="bootstrap/css/font-awesome.css" rel="stylesheet"></link>
+	    <link href="bootstrap/css/docs.css" rel="stylesheet" ></link>	
+	    <link href="bootstrap/bootstrap-social.css" rel="stylesheet" ></link>
+	 <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-42119746-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       
+      })();
+    </script>
 </h:head> 
 <h:body>  
 
 <pm:page id="main">
 	<pm:header title="#{myBundle.AppName}"></pm:header>
 	<pm:content>
-		<a  class="ui-menuitem-link ui-corner-all" href="login.do">
-		Ingresar con cuenta de Facebook
-		</a> 	
+		<form id="frm" action="login.do" method="get">				 
+ 		<span class="btn btn-block btn-social btn-facebook"  href="login.do" 
+ 			onclick="_gaq.push(['_trackEvent', 'exit', 'header', 'flag-icon-css']);frm.submit();" >
+            <span class="fa fa-facebook"></span>  
+            <p:outputLabel  value="#{myBundle.FaceLoginLabel}"/>
+         </span>       
 		<br></br>	   	
 		<p:outputLabel  value="#{faceBookToken.mensaje}"/>
+		</form>
 	</pm:content>
 </pm:page>
  	

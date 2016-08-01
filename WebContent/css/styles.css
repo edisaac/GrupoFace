@@ -1,11 +1,19 @@
 @CHARSET "ISO-8859-1";
-.picture {
- 
-  border-radius: 50%;
- 
-}
- .sticky { position: fixed;
-  width: 100%;
-  left: 0;
-  top: 0;
-  }
+  
+.ui-field-contain{ padding: .5em 0;}
+.ui-field-contain 
+	label		{	font-size: 0.7em;	font-weight: bold;	color: blue;}
+
+.groupName		{ 	font-weight: bold;	display: block;}
+.groupLabel		{	font-size: 0.7em;	font-weight: bold;	color: blue;	display: block;}
+.groupField		{	padding-left: 6em;}
+
+.groupStateP 	{	color: lightcoral ;}
+.groupStateA 	{	color: green;}
+.groupStateC 	{	color: gray ;}
+
+.picture 		{  	border-radius: 50%; padding:0.3em; }
+.userState0		{	background-color:gray;}
+.userState1		{	background-color:green;}
+.userState2		{	background-color:yellow;}
+.userState3		{	background-color:red;} 

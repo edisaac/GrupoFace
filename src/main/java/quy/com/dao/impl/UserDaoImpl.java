@@ -2,18 +2,25 @@ package quy.com.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.StringType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import quy.com.dao.IUserDao;
+import quy.com.entity.DetailGroup;
+import quy.com.entity.Group;
 import quy.com.entity.User;
 
 @Repository 
-@Transactional
+
 public class UserDaoImpl extends Dao implements IUserDao {
 
 	@Override
@@ -49,13 +56,25 @@ public class UserDaoImpl extends Dao implements IUserDao {
 	@Override
 	public User getUserByFaceId(String faceBookId) {
 		// TODO Auto-generated method stub
-		//sizeCriteria.add(Property.forName("user_id").eq(id));
-		return  (User) crearCriteria(User.class).add(
-				//Property.forName("facebookId").eq(faceBookId)
-				Restrictions.eq("facebookId", faceBookId)
-				//Restrictions.sqlRestriction("facebook_id=?",faceBookId,new StringType() )
-				).uniqueResult();
-		
+		return  (User) crearCriteria(User.class).add(				
+				Restrictions.eq("facebookId", faceBookId)				
+				).uniqueResult();		
 	}
+
+	@Override
+	public List<User> getNotGroupUsersByName(int groupId, String name) {
+		// TODO Auto-generated method stub
+		Criteria criteria = crearCriteria(User.class, "u");
+		DetachedCriteria subcriteria = DetachedCriteria.forClass(DetailGroup.class, "dg");
+		subcriteria.add(Restrictions.eq("dg.group.id", groupId));
+		subcriteria.add(Restrictions.eqProperty(  "dg.user.userId", "u.userId"));
+		subcriteria.setProjection(Projections.property("dg.user.userId"));
+		criteria.add(Subqueries.notExists(subcriteria));
+		criteria.add(Restrictions.ilike("u.name","%" + name + "%"));
+		criteria.addOrder(Order.asc("name"));
+		return criteria.list();
+	}
+
+	 
 
 }

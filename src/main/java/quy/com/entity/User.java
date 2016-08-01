@@ -1,5 +1,5 @@
 package quy.com.entity;
-// Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final
+// Generated 29-jul-2016 17:25:51 by Hibernate Tools 4.3.4.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,16 +13,27 @@ public class User implements java.io.Serializable {
 	private String name;
 	private String facebookId;
 	private String urlPicture;
+	private String email;
+	private String mobile;
+	private char state;
 	private Set detailGroups = new HashSet(0);
 	private Set groups = new HashSet(0);
 
 	public User() {
 	}
 
-	public User(String name, String facebookId, String urlPicture, Set detailGroups, Set groups) {
+	public User(char state) {
+		this.state = state;
+	}
+
+	public User(String name, String facebookId, String urlPicture, String email, String mobile, char state,
+			Set detailGroups, Set groups) {
 		this.name = name;
 		this.facebookId = facebookId;
 		this.urlPicture = urlPicture;
+		this.email = email;
+		this.mobile = mobile;
+		this.state = state;
 		this.detailGroups = detailGroups;
 		this.groups = groups;
 	}
@@ -57,6 +68,30 @@ public class User implements java.io.Serializable {
 
 	public void setUrlPicture(String urlPicture) {
 		this.urlPicture = urlPicture;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobile() {
+		return this.mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public char getState() {
+		return this.state;
+	}
+
+	public void setState(char state) {
+		this.state = state;
 	}
 
 	public Set getDetailGroups() {

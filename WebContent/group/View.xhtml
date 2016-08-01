@@ -5,65 +5,68 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:pm="http://primefaces.org/mobile">
 
     <pm:page id="GroupViewPage" lazy="true">
-        <pm:header title="#{myBundle.ViewGroupTitle}">
+        <pm:header title="#{myBundle.ViewGroupTitle}" fixed="true">
             <h:form>
-                <p:commandButton styleClass="ui-btn-left ui-btn-inline" 
-                value="#{myBundle.Back}"
-                 update=":GroupListPage:GroupListForm:datalist"
-                 icon="ui-icon-carat-l" action="pm:GroupListPage"/>
-                 <p:commandButton id="editButton" 
-                                 styleClass="ui-btn-right ui-btn-inline"
-                                 icon="ui-icon-edit"   iconPos="right"
-                                 value="#{myBundle.Edit}" 
+                <p:commandButton id="backButton"  value="#{myBundle.Back}"
+				                 styleClass="ui-btn-left ui-btn-inline" icon="ui-icon-carat-l"				                 
+				                 update=":GroupListPage:GroupListForm"
+                 				 action="pm:GroupListPage?transition=fade"/>
+                 				 
+                <p:commandButton id="editButton"  value="#{myBundle.Edit}"
+                                 styleClass="ui-btn-right ui-btn-inline"  icon="ui-icon-edit"   iconPos="right"                                                                 
                                  update=":GroupEditPage:GroupEditForm"                                  
                                  action="pm:GroupEditPage?transition=slide"/>
-            </h:form>
-            
+            </h:form>            
         </pm:header>
 
         <pm:content>
 
             <h:form id="GroupViewForm">
-				
+				<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
                 <h:panelGroup id="display">
-                	<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+                	
  
-                    <p:outputPanel rendered="#{groupController.selected != null}">
+                    <p:outputPanel >
 
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_name}"/>
-                            <h:outputText value="#{groupController.selected.name}" title="#{myBundle.ViewGroupTitle_name}"/>
+                        <pm:field>                           
+                            <h:outputText value="#{groupBean.selected.name}" 
+                            styleClass="groupName"
+                             title="#{myBundle.GroupTitle_name}"/>
                         </pm:field>
+                        
+                        <pm:field>
+                           <h:outputText value="#{myBundle.GroupLabel_amount}" styleClass="groupLabel"/> 
+                           <h:outputText value="#{groupBean.selected.amount}" title="#{myBundle.GroupTitle_amount}" styleClass="groupField"/>
+                        </pm:field>
+                        
+                        <pm:field>
+                            <h:outputText value="#{myBundle.GroupLabel_period}" styleClass="groupLabel"/>
+                            <h:outputText value="#{groupBean.periodToString(groupBean.selected)}" title="#{myBundle.GroupTitle_period}" styleClass="groupField"/>
+   						</pm:field>
 
                         <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_beginDate}"/>
-                            <h:outputText value="#{groupController.selected.beginDate}" title="#{myBundle.ViewGroupTitle_beginDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <h:outputText value="#{myBundle.GroupLabel_state}" styleClass="groupLabel "/>
+                            <h:outputText value="#{groupBean.stateToString(groupBean.selected)}" 
+                            title="#{myBundle.GroupTitle_state}" styleClass="groupField groupState#{groupBean.selected.state}"/>
+                        </pm:field>
+                        
+                        <pm:field>
+                            <h:outputText value="#{myBundle.GroupLabel_beginDate}" styleClass="groupLabel"/>
+                            <h:outputText value="#{groupBean.selected.beginDate}" title="#{myBundle.GroupTitle_beginDate}" styleClass="groupField">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </pm:field>
-
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_amount}"/>
-                            <h:outputText value="#{groupController.selected.amount}" title="#{myBundle.ViewGroupTitle_amount}"/>
-                        </pm:field>
-
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_period}"/>
-                            <h:outputText value="#{groupController.selected.period}" title="#{myBundle.ViewGroupTitle_period}"/>
-                        </pm:field>
-
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewGroupLabel_state}"/>
-                            <h:outputText value="#{groupController.selected.state}" title="#{myBundle.ViewGroupTitle_state}"/>
-                        </pm:field>
+                        
                     </p:outputPanel>
-                </h:panelGroup>
-
+                </h:panelGroup> 
             </h:form>
-
+            <ui:include src="/detail/IList.xhtml"/>
+			
+ 
         </pm:content>
 
     </pm:page>

@@ -1,5 +1,5 @@
 package quy.com.entity;
-// Generated 26-jul-2016 9:58:34 by Hibernate Tools 4.3.4.Final
+// Generated 29-jul-2016 17:25:51 by Hibernate Tools 4.3.4.Final
 
 import java.math.BigDecimal;
 import java.util.Date;

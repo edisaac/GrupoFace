@@ -6,12 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.github.javaplugs.jsf.ViewScope;
 
 import quy.com.entity.User;
 import quy.com.facebook.FaceBookConnection;
@@ -21,7 +23,7 @@ import quy.com.service.IUserService;
  
 @Controller
 @Scope("session")
-public class FaceBookController {
+public class UserBean {
 
 	@Autowired
 	private FaceBookConnection faceBookConnection;
@@ -30,12 +32,12 @@ public class FaceBookController {
 	private FaceBookToken faceBookToken;
 	
 	@Autowired
+	private IUserService userService;
+ 
 	private User user;
 		
-	@Autowired
-	private IUserService userService;
-	
-	
+	 
+	  
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String nuevaOrden() {
    
@@ -55,33 +57,46 @@ public class FaceBookController {
 		}
 	 
 		faceBookToken.setCode(code);		
-		faceBookToken.doRequest();		
-		 
+		faceBookToken.doRequest();
 		  
 		FaceBookUser fcUser = new FaceBookUser(faceBookToken);
 		fcUser.doRequest();
-				
 		
-		
-		
-		user.setFacebookId(fcUser.getFacebookId()); 
-		user.setName( fcUser.getName());
-		user.setUrlPicture(fcUser.getUrlPicture());
 	 
-		User temp;
-		temp=userService.getUserByFaceId(fcUser.getFacebookId() ) ;
-		if( temp ==null){  
-			if (userService.guardar(user))
+		this.user=userService.getUserByFaceId(fcUser.getFacebookId() ) ;
+		boolean isNew=false;
+		
+		if (this.user==null){
+			this.user= new User();
+			this.user.setState('0');
+			isNew=true;
+		}
+		
+		this.user.setFacebookId(fcUser.getFacebookId()); 
+		this.user.setName( fcUser.getName());
+		this.user.setUrlPicture(fcUser.getUrlPicture());
+		this.user.setEmail(fcUser.getEmail()); 
+		
+		if( isNew){ 			
+			if (userService.guardar(this.user))
 				return "welcome";			
 			faceBookToken.setMensaje("Error: No se pudo crear el usuario.");
 			return "index";
-		} else {
-			user.setUserId(temp.getUserId());		
+		} else {			
 			
-			if (userService.actualizar(user))		
+			if (userService.actualizar(this.user))		
 				return "welcome";
 			faceBookToken.setMensaje("Error: No se pudo actualizar el usuario.");
 			return "index";
 		}
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

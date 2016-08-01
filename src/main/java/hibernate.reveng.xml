@@ -11,9 +11,10 @@
 		</primary-key>
 	</table>
 <table schema="public" name="detail_group">
-	<primary-key>
-		<generator class="identity"></generator>
-	</primary-key>
+<primary-key>
+	<generator class="identity">
+	</generator>
+</primary-key>
 </table>
 <table schema="public" name="group">
 <primary-key>

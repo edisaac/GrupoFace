@@ -4,21 +4,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import quy.com.controller.util.JsfUtil;
+import quy.com.dao.IDetailGroupDao;
 import quy.com.dao.IGroupDao;
+import quy.com.entity.DetailGroup;
 import quy.com.entity.Group;
 import quy.com.service.IGroupService;
 
-@Service("userGroup") 
+@Service("groupService") 
 public class GroupServiceImpl implements IGroupService {
 	@Autowired
 	private IGroupDao groupDao;
-
+	
 	@Override
-	public boolean guardar(Group arg0) {
-		try		{
-			groupDao.guardar(arg0); 			
+	@Transactional
+	public boolean guardar(Group arg0 ) {
+		try		{			 
+			 
+			groupDao.guardar(arg0);
+		
 			return true;
 		}catch (Exception e){
 			JsfUtil.setException(e);
@@ -27,6 +33,7 @@ public class GroupServiceImpl implements IGroupService {
 	}
 
 	@Override
+	@Transactional
 	public boolean actualizar(Group arg0) {
 		try		{
 			groupDao.actualizar(arg0); 		
@@ -38,6 +45,7 @@ public class GroupServiceImpl implements IGroupService {
 	}
 
 	@Override
+	@Transactional
 	public boolean eliminar(Group arg0) {
 		try		{
 			groupDao.eliminar(arg0 ); 		
@@ -49,6 +57,7 @@ public class GroupServiceImpl implements IGroupService {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Group getGroup(int id) {
 		try	{					
 			return groupDao.getGroup(id );	
@@ -59,6 +68,7 @@ public class GroupServiceImpl implements IGroupService {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public List<Group> getGroups() {
 		try	{					
 			return groupDao.getGroups() ;	
@@ -69,6 +79,7 @@ public class GroupServiceImpl implements IGroupService {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public List<Group> getGroupsByUser(int id) {
 		try	{					
 			return groupDao.getGroupsByUser(id) ;	

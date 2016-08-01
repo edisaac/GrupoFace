@@ -12,13 +12,15 @@ public class Dao {
 	public  void setSessionFactory(SessionFactory sf){
         this.sessionFactory = sf;
     }
-    
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
     public Session getSession() throws HibernateException {
     	Session session;
 		try {
-		    session = sessionFactory.getCurrentSession();
+		    session = getSessionFactory().getCurrentSession();
 		} catch (HibernateException e) {
-		    session = sessionFactory.openSession();
+		    session = getSessionFactory().openSession();
 		}
 		
 		return session;
@@ -26,4 +28,9 @@ public class Dao {
     protected Criteria crearCriteria(Class arg0){
 		return getSession().createCriteria( arg0);
 	}
+    protected Criteria crearCriteria(Class arg0,String alias){
+		return getSession().createCriteria( arg0,alias);
+	}
+
+	
 }

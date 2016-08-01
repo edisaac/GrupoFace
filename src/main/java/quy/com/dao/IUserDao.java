@@ -10,5 +10,6 @@ public interface IUserDao {
 	public void eliminar(User arg0);
 	public User getUser(int id);
 	public User getUserByFaceId(String faceBookId);
-	public List<User> getUsers();
+	public List<User> getUsers(); 
+	public List<User> getNotGroupUsersByName(int groupId,String name);
 }

@@ -10,5 +10,6 @@ public interface IUserService {
 	public boolean eliminar(User arg0);
 	public User getUser(int id);
 	public List<User> getUsers();
-	public User getUserByFaceId(String faceBookId);
+	public User getUserByFaceId(String faceBookId); 
+	public List<User> getNotGroupUsersByName(int groupId, String name);
 }

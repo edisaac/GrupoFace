@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pm="http://primefaces.org/mobile">
+                
+            <h:form id="DetailGroupListForm">
+				<p:dataList id="datalist"                          
+                            pt:data-inset="true"
+                            value="#{detailGroupBean.items}"
+                            var="item">
+                        <f:facet name="header">                        	     
+                        	 <p:commandButton id="addLink"
+                        	 	 value="#{myBundle.DetailGroupTitleAddLink}"
+                                  icon="ui-icon-plus"   iconPos="right"                                                                 
+                                 update=":DetailGroupAddPage:DetailGroupAddForm"                                  
+                                 action="pm:DetailGroupAddPage?transition=fade"/>
+                    	</f:facet> 
+                         <p>
+                           
+                         <h:graphicImage url="#{item.user.urlPicture}" styleClass="picture userState#{item.user.state}">  </h:graphicImage> 
+                            <h:outputText value="#{item.position}"/>   -                      
+                            <h:outputText value="#{item.user.name}"/><br></br>
+                             
+                            <h:outputText value="#{item.paymentDate}">
+                                <f:convertDateTime pattern="dd/MM/yy" />
+                            </h:outputText> -
+                             <h:outputText value="#{item.state}"/>
+                          
+                            <p:commandButton id="detailMenu"  
+                                 styleClass="ui-btn-right ui-btn-inline"  icon="ui-icon-bars"   iconPos="right"  
+                                 update="@form:detailGroupMenu" oncomplete="PF('detailGroupDialog').show()"                                                                
+                                  >
+                                  <f:setPropertyActionListener value="#{item}" target="#{detailGroupBean.selected}" />
+                            </p:commandButton>
+                        </p>  
+                      
+              </p:dataList>
+				<p:dialog   widgetVar="detailGroupDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			        <p:outputPanel id="detailGroupMenu">
+			            <p:panelGrid  columns="2" rendered="#{not empty detailGroupBean.selected}"  >
+			               <h:outputText value="#{detailGroupBean.selected.position}"/>  
+			               <h:outputText value="#{detailGroupBean.selected.paymentDate}">
+                                <f:convertDateTime pattern="dd/MM/yy" />
+                            </h:outputText>
+                            
+			              <h:graphicImage url="#{detailGroupBean.selected.user.urlPicture}" styleClass="picture"/>			                
+			              <h:outputText value="#{detailGroupBean.selected.user.name}" />			  
+			            </p:panelGrid>
+			            
+			            <br></br>
+			            <p:menu>				 				    
+							<p:menuitem value="#{myBundle.Up}"  actionListener="#{detailGroupBean.moveUp}"
+						      oncomplete="PF('detailGroupDialog').hide();" update="datalist"  icon="ui-icon-carat-u"/>
+						
+							<p:menuitem value="#{myBundle.Down}"   actionListener="#{detailGroupBean.moveDown}"
+						      oncomplete="PF('detailGroupDialog').hide();" update="datalist"  icon="ui-icon-carat-d"/>
+						      
+						    <p:menuitem value="#{myBundle.Delete}"  actionListener="#{detailGroupBean.delete}"
+						      oncomplete="PF('detailGroupDialog').hide();" update="datalist"  icon="ui-icon-minus"/>
+						</p:menu>
+			        </p:outputPanel>
+			      
+			    </p:dialog>  
+            </h:form>
+</ui:composition>                

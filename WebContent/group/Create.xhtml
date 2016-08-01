@@ -8,7 +8,7 @@
                 xmlns:pm="http://primefaces.org/mobile">
 
     <pm:page id="GroupCreatePage" lazy="true">
-        <pm:header title="#{myBundle.CreateGroupTitle}">
+        <pm:header title="#{myBundle.CreateGroupTitle}" fixed="true">
             <h:form>
                 <p:commandButton styleClass="ui-btn-left ui-btn-inline" 
                 value="#{myBundle.Cancel}" icon="ui-icon-carat-l" 
@@ -19,45 +19,44 @@
         </pm:header>
 
         <pm:content>
-
+			
             <h:form id="GroupCreateForm">
 				
-                <h:panelGroup id="display" rendered="#{groupController.selected != null}">
+                <h:panelGroup id="display" >
                     <p:outputPanel>
 
                         <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateGroupLabel_name}" for="name" />
-                            <p:inputText required="true" id="name" value="#{groupController.selected.name}" title="#{myBundle.CreateGroupTitle_name}"/>
+                            <p:outputLabel value="#{myBundle.GroupLabel_name}" for="name" />
+                            <p:inputText required="true" id="name" value="#{groupBean.selected.name}" title="#{myBundle.GroupTitle_name}"/>
                         </pm:field>
 						 
   				
-                        <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateGroupLabel_beginDate}" for="beginDate" />
-                            <p:calendar  required="true"  showOn="button"  mask="true" id="beginDate" pattern="MM/dd/yyyy" value="#{groupController.selected.beginDate}" title="#{myBundle.CreateGroupTitle_beginDate}"  />
-                        
- 
-                        </pm:field>
+                      
 
                         <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateGroupLabel_amount}" for="amount" />
-                            <p:inputText required="true" id="amount" value="#{groupController.selected.amount}" title="#{myBundle.CreateGroupTitle_amount}"/>
+                            <p:outputLabel value="#{myBundle.GroupLabel_amount}" for="amount" />
+                            <p:inputText required="true" id="amount" value="#{groupBean.selected.amount}" title="#{myBundle.GroupTitle_amount}"/>
                         </pm:field>
- 						  <pm:field>               
-                     		<p:selectOneButton  title="#{myBundle.CreateGroupTitle_period}"
-                     		required="true"  id="period" value="#{groupController.selected.period}">
-					            <f:selectItem itemLabel="#{myBundle.Daily}" itemValue="D" />
-					            <f:selectItem itemLabel="#{myBundle.Weekly}" itemValue="W" />
-					            <f:selectItem itemLabel="#{myBundle.Monthly}" itemValue="M" />
+ 						  <pm:field>    
+ 						   <p:outputLabel value="#{myBundle.GroupLabel_period}" for="period" />           
+                     		<p:selectOneButton  title="#{myBundle.GroupTitle_period}"
+                     		required="true"  id="period" value="#{groupBean.selected.period}">
+					            <f:selectItem itemLabel="#{myBundle.GroupPeriodDaily}" itemValue="D" />
+					            <f:selectItem itemLabel="#{myBundle.GroupPeriodWeekly}" itemValue="W" />
+					            <f:selectItem itemLabel="#{myBundle.GroupPeriodMonthly}" itemValue="M" />
 					        </p:selectOneButton>
   						</pm:field>
-                     
+                          <pm:field>
+                            <p:outputLabel value="#{myBundle.GroupLabel_beginDate}" for="beginDate" />
+                             <p:calendar  required="true" id="beginDate" mode="inline"   value="#{groupBean.selected.beginDate}" title="#{myBundle.GroupTitle_beginDate}"  />
+                       </pm:field>
                         
                     </p:outputPanel>
                      <p:commandButton                  
-		                   actionListener="#{groupController.saveNew}" 
+		                   actionListener="#{groupBean.saveNew}" 
 		                   value="#{myBundle.Save}" 
 		                   icon="ui-icon-check"
-		                    update=":GroupViewPage:GroupViewForm,:growl" 
+		                    update=":GroupViewPage:GroupViewForm,:growl,:GroupViewPage:DetailGroupListForm" 
 		                    action="pm:GroupViewPage?transition=fade"/>
                 </h:panelGroup>
 
